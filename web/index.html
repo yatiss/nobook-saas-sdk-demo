@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NB对接接口Demo</title>
+    <link data-jsfiddle="common" rel="stylesheet" media="screen" href="main.css">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="lodash.core.min.js"></script>
+    <script src="layer-v2.2/layer.js"></script>
+    <script src="OutMain.js"></script>
+</head>
+<body>
+    <div id="listBoxId" class="box">
+        <div class="left-list">
+            <div class="diy-cla"><button class="lab-btn">我的实验</button></div>
+            <ui id="leftId">
+            </ui>
+        </div>
+        <div id="rightId" class="right-list"></div>
+        <ui class="switch-subject">
+
+        </ui>
+        <button class="new-cla diy-cla">新建实验</button>
+        <button class="check-cla diy-cla">根据id查询实验信息</button>
+    </div>
+    <div id="playBoxId" class="box">
+        <button class="return-cla">返回</button>
+        <button class="player-insert-cla insert-cla">插入实验</button>
+        <button class="feedback-cla">我要反馈</button>
+        <iframe id="viewIframeId"
+                allowFullScreen="true"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 100%;"></iframe>
+    </div>
+    <div id="editBoxId" class="box">
+        <button class="return-cla">返回</button>
+        <button class="editor-insert-cla insert-cla">插入实验</button>
+        <button class="save-cla">保存实验</button>
+        <button class="feedback-cla">我要反馈</button>
+        <iframe id="editIframeId"
+                allowFullScreen="true"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 100%;"></iframe>
+    </div>
+</body>
+</html>

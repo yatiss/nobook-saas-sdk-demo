@@ -1,0 +1,9 @@
+.svn
+.idea
+.DS_Store
+node_modules
+temp
+**/*/RECOVER*
+Debug
+Release
+dist

@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+li{
+    list-style-type:none;
+}
+.left-list {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid red;
+}
+.right-list {
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid red;
+    left: 20%;
+    overflow: scroll;
+}
+.item{
+    width: 350px;
+    height: 200px;
+    position: relative;
+    border: 1px solid red;
+    margin: 5px;
+    background-size: contain;
+}
+.box {
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.new-cla {
+    position: absolute;
+    bottom: 0;
+}
+.check-cla {
+    left: 100px;
+    position: absolute;
+    bottom: 0;
+}
+.return-cla {
+    position: absolute;
+}
+.insert-cla{
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+}
+.save-cla {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+}
+.feedback-cla{
+    position: absolute;
+    bottom: 0;
+}
+.div-name {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 2px;
+    width: 200px;
+    color: darkred;
+}
+.editClaSource {
+
+}
+.switch-subject {
+    position: absolute;
+    bottom: 30px;
+    height: 35px;
+    border: aquamarine 1px solid;
+}
+
+.switch-subject > li {
+    display: inline;
+}
