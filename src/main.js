@@ -10,13 +10,13 @@ import {
 } from 'nobook-saas-sdk/nobook/lab';
 /*
 2、页面直接引用方式
-<script src="virtual-experiment.min.js"></script>
-并通过 window 提取SDK
+<script src="lab.min.js"></script>
+并通过 window 提取 NB_SDK_LAB
 const {
     LabSDK,
     MESSAGE_TYPE,
     PID_TYPE
-} = window.NBSDK;
+} = window.NB_SDK_LAB;
 3、es5引用方式
 const NBSDK = require('nobook-saas-sdk/lab.min.js');
  */
