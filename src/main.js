@@ -37,8 +37,8 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        // this.uid = 'zuoyebangtest6'; // 用户账户,必填
-        this.uid = 'miscourseware_test'; // 用户账户,必填
+        this.uid = 'zuoyebangtest6'; // 用户账户,必填
+        // this.uid = 'miscourseware_test'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
         // 物理 PID_TYPE.PHYSICAL
@@ -55,6 +55,7 @@ class main {
                 // DEBUG: true,
                 // EDIT_HOST_DEBUG_PORT: '3033',
                 // EDITER_DEBUG: true,
+                // EDIT_HOST_DEBUG: 'http://192.168.1.22',
                 pid: this.pid,
                 appid: SECRET_DATA.appid, // nobook 提供
                 from: '作业帮'
@@ -185,11 +186,20 @@ class main {
             $('.switch-subject').append(domItem);
         });
         $('.switch-btn').click((evt) => {
-            console.log('切换学科:', $(evt.target).text(), evt.target.name);
-            if (evt.target.name !== this.pid) {
-                this.labSDK.switchSubject({pid: evt.target.name});
-                this.pid = this.labSDK.pid;
-                this.freshList();
+            const to_pid = evt.target.name;
+            console.log('切换学科:', $(evt.target).text(), to_pid);
+            if (to_pid !== this.pid) {
+                const {timestamp, sign} = getServerData(this.uid, this.nickname, to_pid);
+                this.labSDK.switchSubject({
+                    pid: to_pid,
+                    uid: this.uid,
+                    sign: sign,
+                    timestamp: timestamp,
+                    nickname: this.nickname,
+                }).then(() => {
+                    this.pid = this.labSDK.pid;
+                    this.freshList();
+                });
             } else {
                 console.log('已经处于该学科,不能切换!');
             }
