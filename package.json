@@ -1,5 +1,5 @@
 {
-  "name": "en5demo",
+  "name": "nobook-saas-sdk-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,13 @@
     "build:dev": "npm run clean:dist && cross-env BABEL_ENV=commonjs webpack --env=dev",
     "build:prod": "npm run clean:dist && cross-env BABEL_ENV=commonjs webpack --env=prod --hide-modules",
     "start": "npm run server:dev",
-    "server:dev": "webpack-dev-server --config webpack.config.js --progress --colors --port=4040 --host 0.0.0.0 --profile --watch --content-base src/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server:dev": "webpack-dev-server --config webpack.config.js --progress --colors --port=4040 --host 0.0.0.0 --profile --watch --content-base src/"
   },
   "dependencies": {
     "blueimp-md5": "^2.10.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.4",
-    "nobook-saas-sdk": "git+https://github.com/yatiss/nobook-saas-sdk.git#v1.0.26"
+    "@nobook/nobook-saas-sdk": "git+https://github.com/yatiss/nobook-saas-sdk.git#v1.0.28"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

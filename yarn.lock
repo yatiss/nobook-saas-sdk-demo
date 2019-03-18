@@ -6135,9 +6135,9 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-"nobook-saas-sdk@git+https://github.com/yatiss/nobook-saas-sdk.git#v1.0.26":
-  version "1.0.26"
-  resolved "git+https://github.com/yatiss/nobook-saas-sdk.git#d379e2ee56b72c9dae9ad0b7df00271b5938f589"
+"nobook-saas-sdk@git+https://github.com/yatiss/nobook-saas-sdk.git#v1.0.28":
+  version "1.0.28"
+  resolved "git+https://github.com/yatiss/nobook-saas-sdk.git#e3666fe5e401659ff4652eb11f70ec1122480556"
 
 node-gyp@^3.8.0:
   version "3.8.0"

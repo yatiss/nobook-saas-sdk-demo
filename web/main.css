@@ -6,18 +6,27 @@ li{
     list-style-type:none;
 }
 .left-list {
-    width: 20%;
+    width: 30%;
     height: 100%;
     position: absolute;
     border: 1px solid red;
 }
-.right-list {
-    width: 80%;
+.right-box {
+    border: 1px solid red;
+    width: 70%;
     height: 100%;
     position: absolute;
-    border: 1px solid red;
-    left: 20%;
+    left: 30%;
     overflow: scroll;
+}
+.right-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+#labNumsId {
+    font-size: 14px;
+    color: red;
+    margin: 5px;
 }
 .item{
     width: 350px;
@@ -25,7 +34,7 @@ li{
     position: relative;
     border: 1px solid red;
     margin: 5px;
-    background-size: contain;
+    background-size: cover;
 }
 .box {
     margin: 0;
@@ -34,9 +43,21 @@ li{
     width: 100%;
     height: 100%;
 }
-.new-cla {
+.bot-cla {
     position: absolute;
-    bottom: 0;
+    bottom: 13px;
+    display: inline-block;
+}
+.use-cla {
+    margin-left: 50px;
+    margin-right: 10px;
+}
+.ni-cla{
+    margin-left: 10px;
+    font-size: 14px;
+    color: red;
+}
+.new-cla {
 }
 .check-cla {
     left: 100px;
@@ -46,38 +67,63 @@ li{
 .return-cla {
     position: absolute;
 }
-.insert-cla{
-    position: absolute;
-    bottom: 0;
-    left: 200px;
-}
 .save-cla {
     position: absolute;
-    bottom: 0;
-    left: 100px;
-}
-.feedback-cla{
-    position: absolute;
-    bottom: 0;
+    left: 60px;
 }
 .div-name {
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
     bottom: 2px;
-    width: 200px;
-    color: darkred;
+    width: 280px;
+    color: #009688;
+    text-align: center;
 }
 .editClaSource {
 
 }
+.search_cla {
+    position: absolute;
+    bottom: 90px;
+    height: 25px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
+.switch-chapter {
+    position: absolute;
+    bottom: 60px;
+    height: 25px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
 .switch-subject {
     position: absolute;
-    bottom: 30px;
-    height: 35px;
+    bottom: 38px;
+    height: 25px;
     border: aquamarine 1px solid;
 }
 
 .switch-subject > li {
     display: inline;
+}
+.se-cla {
+    width: 80px;
+}
+#seLabelId{
+    font-size: 14px;
+    color: red;
+    display: block;
+}
+.share-div{
+    color: red;
+    font-size: 14px;
+}
+.clear-cla {
+    position: absolute;
+    bottom: 123px;
+    height: 25px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
 }

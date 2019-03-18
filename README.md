@@ -1,6 +1,6 @@
-# NOBOOK SDK 前端SDK接口 demo
+# NOBOOK SDK 实验 demo
 
-appid 与 appkey 需跟nobook申请,然后在 server.js 里配置
+appid 与 appSecret 需跟nobook申请,然后在 server.js 里配置
 
 #### sdk及demo项目位置
 * [基础实验SDK](https://github.com/yatiss/nobook-saas-sdk)

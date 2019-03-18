@@ -2,12 +2,12 @@ import * as md5
     from 'blueimp-md5';
 // 1、es6 或 ts 引用方式
 import {
-    APPID_TEST, // nobook内部使用,对接的小伙伴不需引入
     APPKEY_TEST, // nobook内部使用,对接的小伙伴不需引入
+    APPSECRET_TEST, // nobook内部使用,对接的小伙伴不需引入
     MESSAGE_TYPE,
     LabSDK,
     PID_TYPE
-} from 'nobook-saas-sdk/nobook/lab';
+} from '@nobook/nobook-saas-sdk/nobook/lab';
 /*
 2、页面直接引用方式
 <script src="lab.min.js"></script>
@@ -37,14 +37,15 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        this.uid = 'zuoyebangtest6'; // 用户账户,必填
-        // this.uid = 'miscourseware_test'; // 用户账户,必填
+        // this.uniqueId = '1546456'; // 用户账户,必填
+        this.uniqueId = 'test1'; // 用户账户,必填
+        // this.uniqueId = 'miscourseware_test'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
-        // 物理 PID_TYPE.PHYSICAL
-        // 化学 PID_TYPE.CHEMISTRY
-        // 生物高中 PID_TYPE.BIOLOGICAL2
-        this.pid = PID_TYPE.PHYSICAL; // 产品标识,nobook提供
+        // 初中物理 PID_TYPE.PHYSICAL1
+        // 初中化学 PID_TYPE.CHEMISTRY1
+        // 高中生物 PID_TYPE.BIOLOGICAL2
+        this.pidType = PID_TYPE.PHYSICAL1; // 产品标识,nobook提供
         /** ************************************************************
          *                              第一步: 页面加载完成初始化
          ************************************************************* */
@@ -52,37 +53,54 @@ class main {
             // 先添加设置
             this.labSDK.setConfig({
                 // 登录部分(所有操作必须登陆后执行)
-                // DEBUG: true,
-                // EDIT_HOST_DEBUG_PORT: '3033',
-                // EDITER_DEBUG: true,
-                // EDIT_HOST_DEBUG: 'http://192.168.1.22',
-                pid: this.pid,
-                appid: SECRET_DATA.appid, // nobook 提供
+                DEBUG: true,
+                EDITER_DEBUG: true,
+                EDIT_HOST_DEBUG: 'http://localhost:3033/',
+                pidType: this.pidType,
+                appKey: SECRET_DATA.appKey, // nobook 提供
                 from: '作业帮'
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
-                SECRET_DATA.appid = APPID_TEST;
-                SECRET_DATA.appkey = APPKEY_TEST;
-                this.labSDK.appid = SECRET_DATA.appid;
+                SECRET_DATA.appKey = APPKEY_TEST;
+                SECRET_DATA.appSecret = APPSECRET_TEST;
+                this.labSDK.appKey = SECRET_DATA.appKey;
             }
             // ------------nobook内部测试用end------------//
-            // 登录部分(所有操作必须登陆后执行)
-            const {timestamp, sign} = getServerData(this.uid, this.nickname, this.pid);
-            this.labSDK.login({
-                uid: this.uid,
-                nickname: this.nickname,
-                timestamp,
-                sign
-            }).then((data) => {
-                console.log('~登录成功:', data);
-                this.init();
-            }).catch((err) => {
-                console.warn(err);
-            });
+            this.login();
         });
     }
 
+    login() {
+        // 登录部分(所有操作必须登陆后执行)
+        // pidScope 登录授权的产品id
+        const pidScope = this.labSDK.getAllLabPidScope(); // 用逗号隔开的产品id
+        const {timestamp, sign} = getServerData(this.uniqueId, this.nickname, pidScope);
+        this.labSDK.login({
+            uniqueId: this.uniqueId,
+            nickname: this.nickname,
+            timestamp,
+            sign,
+            pidScope
+        }).then((data) => {
+            console.log('~登录成功:', data);
+            $('.ni-cla').text('已登录: '+this.nickname);
+            this.init();
+        }).catch((err) => {
+            console.warn(err);
+        });
+    }
+
+    loginout() {
+        this.labSDK.logout().then(data => {
+            console.log('~退出成功:', data);
+            $('.ni-cla').text('未登录');
+            $('#rightId').empty();
+            this.freshLabNumsId();
+        }).catch((err) => {
+            console.warn(err);
+        });
+    }
     /** ************************************************************
      *                              demo页面内存操作部分
      ************************************************************* */
@@ -102,13 +120,49 @@ class main {
      * 给页面按钮添加事件
      */
     freshBtnHandles() {
+        // 登录
+        $('.use-cla').val(this.uniqueId);
+        // 登录按钮
+        $('.login-btn').off('click');
+        $('.login-btn').click(evt => {
+            if($('.login-btn').text() === '退出') {
+                // 执行退出
+                $('.login-btn').text('登录');
+                $('.use-cla').val('');
+                this.loginout();
+            } else {
+                // 执行登录
+                let uniqueId = $('.use-cla').val();
+                uniqueId = uniqueId.replace(/(^\s*)|(\s*$)/g, '');
+                if(uniqueId.length) {
+                    $('.login-btn').text('退出');
+                    this.uniqueId = uniqueId;
+                    this.login();
+                }
+            }
+        });
+        // 搜索按钮
+        $('#searchDIYBtn').off('click');
+        $('#searchDIYBtn').click(evt => {
+            this.searchDIY($('#searchDIYId').val());
+        });
+        $('#searchSourceBtn').off('click');
+        $('#searchSourceBtn').click(evt => {
+            this.searchResources($('#searchSourceId').val());
+        });
         // 切换学科按钮
         this.freshSubjectBtn();
+        // 实验按钮
+        $('#clearDIYBtn ').off('click');
+        $('#clearDIYBtn').click((evt) => {
+            this.clearRedis();
+            layer.msg('清除完成');
+        });
         // 实验按钮
         $('.lab-btn ').off('click');
         $('.lab-btn').click((evt) => {
             console.log(evt.target.textContent);
-            this.freshRightList(evt.target.textContent);
+            this.freshRightList(evt.target.value - 0);
         });
         this.showType(1);
         // 返回按钮
@@ -124,21 +178,6 @@ class main {
             console.log('~新建实验');
             this.showType(3);
         });
-        $('.check-cla').off('click');
-        $('.check-cla').click(() => {
-            console.log('~根据id查询实验信息');
-            this.checkFromId('5c63d707a6233a657555ef23'); // 输入要查询的实验id
-        });
-        // 编辑器插入实验
-        $('.editor-insert-cla').off('click');
-        $('.editor-insert-cla').click(() => {
-            console.log('~编辑器插入实验:', this.labId);
-            // 先保存,后插入
-            this.saveData().then((result) => {
-                // 从 result 中取实验id与缩略图地址
-                console.log('~保存实验回调:', result);
-            });
-        });
         // 播放器插入实验
         $('.player-insert-cla').off('click');
         $('.player-insert-cla').click(() => {
@@ -147,26 +186,14 @@ class main {
         $('.save-cla').off('click');
         $('.save-cla').click(() => {
             console.log('~保存实验');
-            /* this.saveData({title: '自定义标题' + new Date().getTime()}).then((result) => {
-                      console.log('~保存实验回调:', result);
-                      layer.msg('保存实验成功');
-                  }); */
             this.saveData().then((result) => {
                 console.log('~保存实验回调:', result);
-                layer.msg('保存实验成功');
+                layer.msg(`保存实验${result.success ? '成功':'失败'}`);
             });
         });
-        $('.feedback-cla').off('click');
-        $('.feedback-cla').click(() => {
-            console.log('~点击反馈');
-            this.labSDK.sendFeedback({
-                title: '测试文本', // 标题【最大不能超过32个字符串】
-                content: `测试文本的内容${new Date().getTime()}`, // 内容
-                source: 'xxx公司', // 来源【对接公司名称】
-                pics: '' // 图片超链接(非必须)
-            }).then((data) => {
-                console.log('*****请求反馈结果:', data);
-            });
+        $('.switch-chapter').off('click');
+        $('.switch-chapter').click((evt) => {
+            this.freshList(evt.target.value);
         });
         this.freshHidden();
     }
@@ -175,31 +202,27 @@ class main {
     freshSubjectBtn() {
         $('.switch-subject').empty();
         const arr = [
-            ['物理', PID_TYPE.PHYSICAL],
-            ['化学', PID_TYPE.CHEMISTRY],
-            ['生物初中', PID_TYPE.BIOLOGICAL1],
-            ['生物高中', PID_TYPE.BIOLOGICAL2]
+            ['初中物理', PID_TYPE.PHYSICAL1],
+            ['高中物理', PID_TYPE.PHYSICAL2],
+            ['初中化学', PID_TYPE.CHEMICAL1],
+            ['高中化学', PID_TYPE.CHEMICAL2],
+            ['初中生物', PID_TYPE.BIOLOGICAL1],
+            ['高中生物', PID_TYPE.BIOLOGICAL2]
         ];
         $('.switch-btn').off('click');
         arr.forEach((item) => {
-            const domItem = `<li><button class="switch-btn" name="${item[1]}">${item[0]}</button></li>`;
+            const domItem = `<li><button class="switch-btn" value="${item[1]}">${item[0]}</button></li>`;
             $('.switch-subject').append(domItem);
         });
         $('.switch-btn').click((evt) => {
-            const to_pid = evt.target.name;
-            console.log('切换学科:', $(evt.target).text(), to_pid);
-            if (to_pid !== this.pid) {
-                const {timestamp, sign} = getServerData(this.uid, this.nickname, to_pid);
+            const pidType = evt.target.value;
+            console.log('切换学科:', $(evt.target).text(), pidType);
+            if (pidType !== this.pidType) {
                 this.labSDK.switchSubject({
-                    pid: to_pid,
-                    uid: this.uid,
-                    sign: sign,
-                    timestamp: timestamp,
-                    nickname: this.nickname,
-                }).then(() => {
-                    this.pid = this.labSDK.pid;
-                    this.freshList();
+                    pidType: pidType
                 });
+                this.pidType = this.labSDK.pidType;
+                this.freshList();
             } else {
                 console.log('已经处于该学科,不能切换!');
             }
@@ -218,67 +241,231 @@ class main {
     /**
      * 刷新页面左右侧列表
      */
-    freshList() {
-        this.freshLeftList();
-        this.freshRightList('我的实验');
+    freshList(type) {
+        if(!type || type === '0') {
+            // 模块形式
+            console.log('~~~模块形式排版');
+            $('.module-class').show();
+            $('.chapter-class').hide();
+            this.freshLeftList();
+            this.freshRightList(-1);
+        } else {
+            // 章节形式
+            console.log('~~~章节形式排版');
+            $('.module-class').hide();
+            $('.chapter-class').show();
+            this.freshLeftListByChapter();
+        }
+
         setTimeout(() => {
             this.freshBtnHandles();
         }, 1000);
     }
 
     /**
-     * 刷新左侧列表
+     * 刷新左侧列表(模块形式)
      */
     freshLeftList() {
         $('#leftId').empty();
         this.getClassificationsList().then((obj) => {
             this.addLeftList(obj.data);
         }).catch((err) => {
-            console.warn('左侧列表~~~~~~', err);
+            console.warn('刷新左侧列表(模块形式)~~~~~~', err);
         });
+    }
+
+    /**
+     * 刷新左侧列表(章节形式)
+     */
+    freshLeftListByChapter() {
+        this.getChapter().then(obj => {
+            $('.se-cla').off('change');
+            $('.chapter-class').empty();
+            this.gradeData = obj.data;
+            this.levelArr = [];
+            this.addSelect();
+            this.freshOption(0);
+            this.freshOption(1);
+            this.freshOption(2);
+        }).catch((err) => {
+            console.warn('刷新左侧列表(章节形式)~~~~~~', err);
+        });
+    }
+
+    // 分级显示右侧内容
+    // 结构: 年级-学科-版本-教材-章-节
+    // 传参只传后4项: 版本-教材-章-节       textbookId-versionId-chapterId-
+    findByLevel(idArr) {
+        console.log('~~分级显示id:', idArr.join(','));
+        $('#rightId').empty();
+        this.labSDK.getResourcesByChapter({
+            textbookId:idArr[2],
+            versionId:idArr[3],
+            chapterId:idArr[4],
+            sectionId:idArr[5]
+        }).then((obj) => {
+            console.log('***************列表数量:', obj.data.length);
+            this.addRightList(obj, false);
+        }).catch((err) => {
+            console.warn('~~~~~~~~getLabList:', err);
+        });
+    }
+
+    selectedFunc(evt) {
+        const optValue = $(evt.target).children('option:selected').val();
+        const arr = optValue.split('-');
+        const seIndex = arr[1] - 0; //
+        const optIndex = arr[2] - 0;
+        if(seIndex >= this.levelArr.length) return;
+        this.levelArr[seIndex].selected = optIndex;
+        if (seIndex < 5) {
+            this.freshOption(seIndex + 1);
+        }
+        // 提取内容
+        const tArr = []; // 最终分级数组
+        let nextArr = this.gradeData;
+        let curItem;
+        for(let i=0;i<=seIndex;i++) {
+            curItem = nextArr[this.levelArr[i].selected];
+            tArr.push(curItem);
+            if(curItem.children) {
+                nextArr = curItem.children;
+            }
+        }
+        //seLabelId
+        let str = ' 分级显示:';
+        let idArr = [];
+        tArr.forEach((item,index) => {
+            str += item.name;
+            if(index < tArr.length - 1) {
+                str += ' -> ';
+            }
+            idArr.push(item.id);
+        });
+        $('#seLabelId').text(str);
+        //
+        this.findByLevel(idArr);
+    }
+
+    addSelect() {
+        $('.chapter-class').append(`<label id="seLabelId">分级显示:</label>`);
+        for(let i=0;i<6;i++) {
+            const $se = $(`<select id="seId-${i}" class="se-cla"></select>`);
+            $('.chapter-class').append($se);
+        }
+        $('.se-cla').on('change', this.selectedFunc.bind(this));
+    }
+
+    freshOption(levelIndex) {
+        // 后面的移除
+        this.levelArr.splice(levelIndex);
+        for(let i=levelIndex;i<=5;i++) {
+            $(`#seId-${i}`).empty();
+        }
+        // 根据 levelArr 进行刷新
+        if (levelIndex === 0) {
+            // 第一级: 初高中
+            if (!this.levelArr[0]) {
+                this.levelArr[0] = {selected:0};
+                $(`#seId-0`).append(`<option selected="selected">${this.gradeData[0].name}</option>`);
+            }
+        } else {
+            const oriItem = this.levelArr[levelIndex - 1]; // 上一级
+            let nextArr = this.gradeData;
+            let curItem;
+            for(let i=0;i<levelIndex;i++) {
+                curItem = nextArr[this.levelArr[i].selected];
+                if(curItem && curItem.children) {
+                    nextArr = curItem.children;
+                }
+            }
+            // 遍历 nextArr 添加 option
+            nextArr.forEach((item, index) => {
+                const optValue = `opt-${levelIndex}-${index}`;
+                if(index === 0) {
+                    $(`#seId-${levelIndex}`).append(`<option selected="selected" value="${optValue}">${item.name}</option>`);
+                } else {
+                    $(`#seId-${levelIndex}`).append(`<option value="${optValue}">${item.name}</option>`);
+                }
+            });
+            this.levelArr[levelIndex] = {selected:0};
+        }
     }
 
     /**
      * 刷新右侧列表
      * @param typename
      */
-    freshRightList(typename) {
+    freshRightList(categoryId) {
         $('#rightId').empty();
-        const isMy = typename === '我的实验'; // 是否为 我的实验 (否则为 资源实验)
-        this.getLabList(typename, isMy).then((obj) => {
-            this.addRightList(obj.data, isMy);
-        }).catch((err) => {
-            console.warn('~~~~~~~~getLabList:', err);
-        });
+        this.freshLabNumsId();
+        if (categoryId === -1) {
+            // 为我的实验
+            this.labSDK.getDIYLabList({page:1, perPage: 50}).then((obj) => {
+                this.addRightList(obj.data, true);
+            }).catch((err) => {
+                console.warn('~~~~~~~~getDIYLabList:', err);
+            });
+        } else {
+            // 为官方资源
+            this.labSDK.getResourcesByCategory({categoryId:categoryId}).then((obj) => {
+                this.addRightList(obj, false);
+            }).catch((err) => {
+                console.warn('~~~~~~~~getResourcesByCategory:', err);
+            });
+        }
     }
 
     /**
      * 在页面左侧添加元素
      * @param arr
      */
-    addLeftList(arr) {
-        for (let i = 0; arr && i < arr.length; i++) {
-            const item = `<li><button class="lab-btn">${arr[i]}</button></li>`;
-            $('#leftId').append(item);
-        }
+    addLeftList(obj) {
+        Object.keys(obj).forEach(item => {
+            $('#leftId').append(`<li><button class="lab-btn" value="${item}">${obj[item]}</button></li>`);
+        });
     }
 
     /**
      * 在页面右侧添加元素
-     * @param arr
+     * @param obj
      * @param isMy
      */
-    addRightList(arr, isMy) {
-        for (let i = 0; arr && i < arr.length; i++) {
-            let labItem = arr[i];
-            let item;
-            if (isMy) {
-                item = this.getMyItem(labItem._id, labItem.title, this.labSDK.getMyIconURL(labItem.properties.icon.url));
-            } else {
-                item = this.getSourceItem(labItem.id, labItem.name, this.labSDK.getOfficiaIconURL(labItem.icon));
+    addRightList(obj, isMy) {
+        if (isMy) {
+            // 为我的实验
+            let arr = obj.data;
+            console.log('~~分页数据:page:', obj.page);
+            console.log('~~分页数据:perPage:', obj.perPage);
+            for (let i = 0; arr && i < arr.length; i++) {
+                let labItem = arr[i];
+                let item;
+                if (isMy) {
+                    // 为我的实验
+                    item = this.getMyItem(labItem._id, labItem.title, this.labSDK.getDIYIconURL(labItem.properties.icon.url));
+                } else {
+                    // 为官方资源
+                    item = this.getSourceItem(labItem._id, labItem.title, this.labSDK.getOfficiaIconURL(labItem.iconUrl));
+                }
+                $('#rightId').append(item);
             }
-            $('#rightId').append(item);
+        } else {
+            // 为官方资源
+            let arr = obj.data;
+            for (let i = 0; arr && i < arr.length; i++) {
+                let labItem = arr[i];
+                let  item = this.getSourceItem(labItem._id, labItem.title, this.labSDK.getOfficiaIconURL(labItem.iconUrl));
+                $('#rightId').append(item);
+            }
         }
+
+        //
+        $('.insertCla').off('click');
+        $('.insertCla').on('click', (evt) => {
+            let labId = evt.target.value;
+            console.log('插入实验id: ', labId);
+            layer.msg('插入实验id: '+labId);
+        });
         //
         $('.viewCla').off('click');
         $('.viewCla').on('click', (evt) => {
@@ -304,21 +491,50 @@ class main {
             this.delData(labId).then((obj) => {
                 console.log('~删除:', obj.success, obj.msg);
                 // 刷新右侧列表
-                this.freshRightList('我的实验');
+                this.freshRightList(-1);
             });
         });
         //
         $('.renameCla').off('click');
         $('.renameCla').on('click', (evt) => {
             let labId = evt.target.value;
-            let newName = $(evt.target).siblings('input').val();
-            this.renameData(labId, newName).then((obj) => {
+            let newTitle = $(evt.target).siblings('input').val();
+            this.renameData(labId, newTitle).then((obj) => {
                 console.log('~重命名:', obj);
                 // 刷新右侧列表
-                this.freshRightList('我的实验');
+                this.freshRightList(-1);
             });
         });
+        //
+        $('.shareBtnCla').off('click');
+        $('.shareBtnCla').on('click', (evt) => {
+            let labId = evt.target.value;
+            let otherUniqueId = $(evt.target).siblings('input').val();
+            otherUniqueId = otherUniqueId.replace(/(^\s*)|(\s*$)/g, '');
+            console.log('用户: ', otherUniqueId, '        分享实验:', labId);
+            if(!otherUniqueId.length) {
+                layer.msg('分享用户不能为空');
+            } else {
+                this.share(labId, otherUniqueId);
+            }
+        });
+        //
+        $('.diyInfoCla').off('click');
+        $('.sourceInfoCla').off('click');
+        $('.diyInfoCla,.sourceInfoCla').on('click', (evt) => {
+            let labId = evt.target.value;
+            console.log('*************', $(evt.target).hasClass('diyInfoCla'));
+            if($(evt.target).hasClass('diyInfoCla')) {
+                // DIY
+                this.getInfoDIY(labId);
+            } else {
+                // 资源
+                this.getInfoResources(labId);
+            }
+        });
+        //
         this.freshHidden();
+        this.freshLabNumsId();
     }
 
     /**
@@ -327,10 +543,15 @@ class main {
     getMyItem(id, name, iconURL) {
         return `
             <div class="item" style="background-image: url(${iconURL});">
+                <button class="insertCla" value="${id}">插入</button>
                 <button class="viewCla" value="${id}">预览</button>
                 <button class="editCla" value="${id}">编辑</button>
                 <button class="delCla" value="${id}">删除</button>
                 <button class="renameCla" value="${id}">重命名</button>
+                <button class="diyInfoCla" value="${id}">获取详情</button>
+                <div class="share-div">
+                    <label>其他用户id</label><input><button class="shareBtnCla" value="${id}">分享实验</button>
+                </div>
                 <input class="div-name" value="${name}"></input>
          </div>
         `;
@@ -342,8 +563,10 @@ class main {
     getSourceItem(id, name, iconURL) {
         return `
             <div class="item" style="background-image: url(${iconURL});">
+                <button class="insertCla" value="${id}">插入</button>
                 <button class="viewCla" value="${id}">预览</button>
                 <button class="editClaSource diy-cla" value="${id}">编辑</button>
+                <button class="sourceInfoCla" value="${id}">获取详情</button>
                 <div class="div-name">${name}</div>
             </div>
         `;
@@ -413,15 +636,55 @@ class main {
         }
     }
 
+    freshLabNumsId() {
+        $('#labNumsId').text(' 实验数量：'+ $('#rightId').children().length);
+    }
+
     /** **************************************************************
      *                              实验接口测试部分
      *************************************************************** */
+    searchDIY(keyword) {
+        keyword = keyword || '';
+        keyword = keyword.replace(/(^\s*)|(\s*$)/g, '');
+        console.log('~~搜索DIY:', keyword);
+        $('#rightId').empty();
+        this.freshLabNumsId();
+        if(!keyword.length) {
+            // 返回所有
+            this.freshRightList(-1);
+        } else {
+            // 返回指定
+            this.labSDK.searchDIY({keyword:keyword}).then(obj => {
+                this.addRightList(obj, true);
+            });
+        }
+    }
+
+    searchResources(keyword) {
+        keyword = keyword || '';
+        keyword = keyword.replace(/(^\s*)|(\s*$)/g, '');
+        console.log('~~搜索官方资源:', keyword);
+        $('#rightId').empty();
+        this.freshLabNumsId();
+        this.labSDK.searchResources({keyword:keyword}).then(obj => {
+            this.addRightList(obj, false);
+        });
+    }
+
     /**
-     * 获取获取资源类别接口
+     * 获取获取资源类别接口(模块分类)
      */
     getClassificationsList() {
         // 物理有模块接口
         return this.labSDK.getClassificationsList();
+    }
+
+    /**
+     * 章节分类
+     */
+    getChapter() {
+        // 物理有模块接口
+        return this.labSDK.getChapter();
     }
 
     /**
@@ -439,7 +702,7 @@ class main {
      * @param labId
      */
     delData(labId) {
-        return this.labSDK.deleteData(labId);
+        return this.labSDK.deleteData({labId});
     }
 
     /**
@@ -447,35 +710,54 @@ class main {
      * @param labId
      * @param name
      */
-    renameData(labId, title) {
-        return this.labSDK.renameData(labId, title);
+    renameData(labId, newTitle) {
+        return this.labSDK.renameData({labId, newTitle});
     }
 
     /**
-     * 获取实验列表接口
-     * @param typename 类型名称
-     * @param isMy 是否为"我的实验"类型
-     * @returns {Promise<any>}
+     * 获取单个实验详细信息的接口
      */
-    getLabList(typename, isMy) {
-        if (isMy) {
-            return this.labSDK.getMyLabList();
-        }
-        return this.labSDK.getLabList(typename);
-
-    }
-
-    /**
-     * 获取单个实验详细信息的接口(DIY的物理/化学专用)
-     */
-    checkFromId(labId) {
-        return this.labSDK.getLabDetail(labId).then((param) => {
+    getInfoResources(labId) {
+        this.labSDK.getInfoResources({labId}).then((param) => {
             const obj = param.data;
-            console.log('~实验昵称:', obj.title);
-            console.log('~实验是否包含vip元件:', obj.containsVipequ); // true代表有vip器材;false或undefined代表无vip器材
-            console.log('~实验缩略图:', this.labSDK.getMyIconURL(obj.properties.icon.url)); // true代表有vip器材;false或undefined代表无vip器材
+            const mess = `
+                ~实验昵称: ${obj.title}
+                ~实验是否包含vip元件: ${obj.containsVipequ} 
+                ~实验缩略图: ${obj.iconfull}
+            `;
+            console.log(mess);
+            layer.msg(mess);
         }).catch((param) => {
             console.log('~获取单个实验详细信息失败:', param);
+        });
+    }
+
+    getInfoDIY(labId) {
+        this.labSDK.getInfoDIY({labId}).then((param) => {
+            const obj = param.data;
+            // containsVipequ:true代表有vip器材;false或undefined代表无vip器材
+            const mess = `
+                ~实验昵称: ${obj.title}
+                ~实验是否包含vip元件: ${obj.containsVipequ}
+                ~实验缩略图: ${obj.iconfull}
+            `;
+            console.log(mess);
+            layer.msg(mess);
+        }).catch((param) => {
+            console.log('~获取单个实验详细信息失败:', param);
+        });
+    }
+
+    share(labId, otherUniqueId) {
+        return this.labSDK.shareDIY({
+            uniqueId: otherUniqueId,
+            labId: labId
+        });
+    }
+
+    clearRedis() {
+        this.labSDK.clearRedis().then(data => {
+            console.log('~~~clear result:', data);
         });
     }
 }
