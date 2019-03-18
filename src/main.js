@@ -37,9 +37,7 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        // this.uniqueId = '1546456'; // 用户账户,必填
-        this.uniqueId = 'test1'; // 用户账户,必填
-        // this.uniqueId = 'miscourseware_test'; // 用户账户,必填
+        this.uniqueId = 'zuotest1'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
         // 初中物理 PID_TYPE.PHYSICAL1
@@ -84,7 +82,7 @@ class main {
             pidScope
         }).then((data) => {
             console.log('~登录成功:', data);
-            $('.ni-cla').text('已登录: '+this.nickname);
+            $('.ni-cla').text('已登录: ' + this.nickname);
             this.init();
         }).catch((err) => {
             console.warn(err);
@@ -101,6 +99,7 @@ class main {
             console.warn(err);
         });
     }
+
     /** ************************************************************
      *                              demo页面内存操作部分
      ************************************************************* */
@@ -125,7 +124,7 @@ class main {
         // 登录按钮
         $('.login-btn').off('click');
         $('.login-btn').click(evt => {
-            if($('.login-btn').text() === '退出') {
+            if ($('.login-btn').text() === '退出') {
                 // 执行退出
                 $('.login-btn').text('登录');
                 $('.use-cla').val('');
@@ -134,7 +133,7 @@ class main {
                 // 执行登录
                 let uniqueId = $('.use-cla').val();
                 uniqueId = uniqueId.replace(/(^\s*)|(\s*$)/g, '');
-                if(uniqueId.length) {
+                if (uniqueId.length) {
                     $('.login-btn').text('退出');
                     this.uniqueId = uniqueId;
                     this.login();
@@ -168,7 +167,7 @@ class main {
         // 返回按钮
         $('.return-cla ').off('click');
         $('.return-cla').click(() => {
-            $('#editIframeId').attr('src', '');
+            this.clearIframe($('#editIframeId')[0]);
             this.showType(1);
             // 刷新左右侧列表
             this.freshList();
@@ -188,7 +187,7 @@ class main {
             console.log('~保存实验');
             this.saveData().then((result) => {
                 console.log('~保存实验回调:', result);
-                layer.msg(`保存实验${result.success ? '成功':'失败'}`);
+                layer.msg(`保存实验${result.success ? '成功' : '失败'}`);
             });
         });
         $('.switch-chapter').off('click');
@@ -242,7 +241,7 @@ class main {
      * 刷新页面左右侧列表
      */
     freshList(type) {
-        if(!type || type === '0') {
+        if (!type || type === '0') {
             // 模块形式
             console.log('~~~模块形式排版');
             $('.module-class').show();
@@ -294,17 +293,16 @@ class main {
 
     // 分级显示右侧内容
     // 结构: 年级-学科-版本-教材-章-节
-    // 传参只传后4项: 版本-教材-章-节       textbookId-versionId-chapterId-
+    // 传参只传后4项: 版本-教材-章-节      versionId-textbookId-chapterId-sectionId
     findByLevel(idArr) {
         console.log('~~分级显示id:', idArr.join(','));
         $('#rightId').empty();
         this.labSDK.getResourcesByChapter({
-            textbookId:idArr[2],
-            versionId:idArr[3],
-            chapterId:idArr[4],
-            sectionId:idArr[5]
+            versionId: idArr[2],
+            textbookId: idArr[3],
+            chapterId: idArr[4],
+            sectionId: idArr[5]
         }).then((obj) => {
-            console.log('***************列表数量:', obj.data.length);
             this.addRightList(obj, false);
         }).catch((err) => {
             console.warn('~~~~~~~~getLabList:', err);
@@ -316,7 +314,7 @@ class main {
         const arr = optValue.split('-');
         const seIndex = arr[1] - 0; //
         const optIndex = arr[2] - 0;
-        if(seIndex >= this.levelArr.length) return;
+        if (seIndex >= this.levelArr.length) return;
         this.levelArr[seIndex].selected = optIndex;
         if (seIndex < 5) {
             this.freshOption(seIndex + 1);
@@ -325,19 +323,19 @@ class main {
         const tArr = []; // 最终分级数组
         let nextArr = this.gradeData;
         let curItem;
-        for(let i=0;i<=seIndex;i++) {
+        for (let i = 0; i <= seIndex; i++) {
             curItem = nextArr[this.levelArr[i].selected];
             tArr.push(curItem);
-            if(curItem.children) {
+            if (curItem.children) {
                 nextArr = curItem.children;
             }
         }
         //seLabelId
         let str = ' 分级显示:';
         let idArr = [];
-        tArr.forEach((item,index) => {
+        tArr.forEach((item, index) => {
             str += item.name;
-            if(index < tArr.length - 1) {
+            if (index < tArr.length - 1) {
                 str += ' -> ';
             }
             idArr.push(item.id);
@@ -349,7 +347,7 @@ class main {
 
     addSelect() {
         $('.chapter-class').append(`<label id="seLabelId">分级显示:</label>`);
-        for(let i=0;i<6;i++) {
+        for (let i = 0; i < 6; i++) {
             const $se = $(`<select id="seId-${i}" class="se-cla"></select>`);
             $('.chapter-class').append($se);
         }
@@ -359,36 +357,36 @@ class main {
     freshOption(levelIndex) {
         // 后面的移除
         this.levelArr.splice(levelIndex);
-        for(let i=levelIndex;i<=5;i++) {
+        for (let i = levelIndex; i <= 5; i++) {
             $(`#seId-${i}`).empty();
         }
         // 根据 levelArr 进行刷新
         if (levelIndex === 0) {
             // 第一级: 初高中
             if (!this.levelArr[0]) {
-                this.levelArr[0] = {selected:0};
+                this.levelArr[0] = {selected: 0};
                 $(`#seId-0`).append(`<option selected="selected">${this.gradeData[0].name}</option>`);
             }
         } else {
             const oriItem = this.levelArr[levelIndex - 1]; // 上一级
             let nextArr = this.gradeData;
             let curItem;
-            for(let i=0;i<levelIndex;i++) {
+            for (let i = 0; i < levelIndex; i++) {
                 curItem = nextArr[this.levelArr[i].selected];
-                if(curItem && curItem.children) {
+                if (curItem && curItem.children) {
                     nextArr = curItem.children;
                 }
             }
             // 遍历 nextArr 添加 option
             nextArr.forEach((item, index) => {
                 const optValue = `opt-${levelIndex}-${index}`;
-                if(index === 0) {
+                if (index === 0) {
                     $(`#seId-${levelIndex}`).append(`<option selected="selected" value="${optValue}">${item.name}</option>`);
                 } else {
                     $(`#seId-${levelIndex}`).append(`<option value="${optValue}">${item.name}</option>`);
                 }
             });
-            this.levelArr[levelIndex] = {selected:0};
+            this.levelArr[levelIndex] = {selected: 0};
         }
     }
 
@@ -401,14 +399,17 @@ class main {
         this.freshLabNumsId();
         if (categoryId === -1) {
             // 为我的实验
-            this.labSDK.getDIYLabList({page:1, perPage: 50}).then((obj) => {
+            this.labSDK.getDIYLabList({
+                page: 1,
+                perPage: 50
+            }).then((obj) => {
                 this.addRightList(obj.data, true);
             }).catch((err) => {
                 console.warn('~~~~~~~~getDIYLabList:', err);
             });
         } else {
             // 为官方资源
-            this.labSDK.getResourcesByCategory({categoryId:categoryId}).then((obj) => {
+            this.labSDK.getResourcesByCategory({categoryId: categoryId}).then((obj) => {
                 this.addRightList(obj, false);
             }).catch((err) => {
                 console.warn('~~~~~~~~getResourcesByCategory:', err);
@@ -454,7 +455,7 @@ class main {
             let arr = obj.data;
             for (let i = 0; arr && i < arr.length; i++) {
                 let labItem = arr[i];
-                let  item = this.getSourceItem(labItem._id, labItem.title, this.labSDK.getOfficiaIconURL(labItem.iconUrl));
+                let item = this.getSourceItem(labItem._id, labItem.title, this.labSDK.getOfficiaIconURL(labItem.iconUrl));
                 $('#rightId').append(item);
             }
         }
@@ -464,7 +465,7 @@ class main {
         $('.insertCla').on('click', (evt) => {
             let labId = evt.target.value;
             console.log('插入实验id: ', labId);
-            layer.msg('插入实验id: '+labId);
+            layer.msg('插入实验id: ' + labId);
         });
         //
         $('.viewCla').off('click');
@@ -512,7 +513,7 @@ class main {
             let otherUniqueId = $(evt.target).siblings('input').val();
             otherUniqueId = otherUniqueId.replace(/(^\s*)|(\s*$)/g, '');
             console.log('用户: ', otherUniqueId, '        分享实验:', labId);
-            if(!otherUniqueId.length) {
+            if (!otherUniqueId.length) {
                 layer.msg('分享用户不能为空');
             } else {
                 this.share(labId, otherUniqueId);
@@ -524,7 +525,7 @@ class main {
         $('.diyInfoCla,.sourceInfoCla').on('click', (evt) => {
             let labId = evt.target.value;
             console.log('*************', $(evt.target).hasClass('diyInfoCla'));
-            if($(evt.target).hasClass('diyInfoCla')) {
+            if ($(evt.target).hasClass('diyInfoCla')) {
                 // DIY
                 this.getInfoDIY(labId);
             } else {
@@ -637,7 +638,7 @@ class main {
     }
 
     freshLabNumsId() {
-        $('#labNumsId').text(' 实验数量：'+ $('#rightId').children().length);
+        $('#labNumsId').text(' 实验数量：' + $('#rightId').children().length);
     }
 
     /** **************************************************************
@@ -649,12 +650,12 @@ class main {
         console.log('~~搜索DIY:', keyword);
         $('#rightId').empty();
         this.freshLabNumsId();
-        if(!keyword.length) {
+        if (!keyword.length) {
             // 返回所有
             this.freshRightList(-1);
         } else {
             // 返回指定
-            this.labSDK.searchDIY({keyword:keyword}).then(obj => {
+            this.labSDK.searchDIY({keyword: keyword}).then(obj => {
                 this.addRightList(obj, true);
             });
         }
@@ -666,7 +667,7 @@ class main {
         console.log('~~搜索官方资源:', keyword);
         $('#rightId').empty();
         this.freshLabNumsId();
-        this.labSDK.searchResources({keyword:keyword}).then(obj => {
+        this.labSDK.searchResources({keyword: keyword}).then(obj => {
             this.addRightList(obj, false);
         });
     }
@@ -711,7 +712,10 @@ class main {
      * @param name
      */
     renameData(labId, newTitle) {
-        return this.labSDK.renameData({labId, newTitle});
+        return this.labSDK.renameData({
+            labId,
+            newTitle
+        });
     }
 
     /**
@@ -759,6 +763,15 @@ class main {
         this.labSDK.clearRedis().then(data => {
             console.log('~~~clear result:', data);
         });
+    }
+
+    clearIframe(iframe) {
+        iframe.src = 'about:blank';
+        try {
+            iframe.contentWindow.document.write('');
+            iframe.contentWindow.document.clear();
+        } catch (e) {
+        }
     }
 }
 
