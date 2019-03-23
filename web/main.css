@@ -127,3 +127,7 @@ li{
     margin-bottom: 10px;
     border: #cf2727 1px solid;
 }
+.insert-cla{
+    position: absolute;
+    left: 100px;
+}

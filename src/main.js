@@ -52,8 +52,10 @@ class main {
             this.labSDK.setConfig({
                 // 登录部分(所有操作必须登陆后执行)
                 DEBUG: true,
-                EDITER_DEBUG: true,
-                EDIT_HOST_DEBUG: 'http://localhost:3033/',
+                // EDITER_DEBUG: true,
+                // EDIT_HOST_DEBUG: 'http://localhost:3033/',
+                PLAYER_DEBUG: true,
+                PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
                 from: '作业帮'
