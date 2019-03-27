@@ -49,7 +49,6 @@ li{
     display: inline-block;
 }
 .use-cla {
-    margin-left: 50px;
     margin-right: 10px;
 }
 .ni-cla{
@@ -130,4 +129,12 @@ li{
 .insert-cla{
     position: absolute;
     left: 100px;
+}
+.login-box{
+    position: absolute;
+    bottom: 154px;
+    height: 25px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
 }

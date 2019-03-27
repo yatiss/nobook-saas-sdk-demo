@@ -37,7 +37,7 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        this.uniqueId = 'zuotest1'; // 用户账户,必填
+        this.uniqueId = 'zuotest2'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
         // 初中物理 PID_TYPE.PHYSICAL1
@@ -52,10 +52,10 @@ class main {
             this.labSDK.setConfig({
                 // 登录部分(所有操作必须登陆后执行)
                 DEBUG: true,
-                // EDITER_DEBUG: true,
-                // EDIT_HOST_DEBUG: 'http://localhost:3033/',
-                PLAYER_DEBUG: true,
-                PLAYER_HOST_DEBUG: 'http://localhost:4800/',
+                EDITER_DEBUG: true,
+                EDIT_HOST_DEBUG: 'http://localhost:3033/',
+                // PLAYER_DEBUG: true,
+                // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
                 from: '作业帮'
@@ -175,9 +175,9 @@ class main {
             this.freshList();
         });
         $('.new-cla').off('click');
-        $('.new-cla').click(() => {
-            console.log('~新建实验');
-            this.showType(3);
+        $('.new-cla').click((evt) => {
+            console.log('~新建实验', evt.target.value);
+            this.showType(3, null, evt.target.value);
         });
         // 播放器插入实验
         $('.player-insert-cla').off('click');
@@ -580,7 +580,7 @@ class main {
      * @param type
      * @param labId
      */
-    showType(type, labId) {
+    showType(type, labId, grade) {
         this.labId = labId;
         $('#listBoxId,#editBoxId,#playBoxId').hide();
         switch (type) {
@@ -592,7 +592,7 @@ class main {
                 if (labId) {
                     // 打开实验
                     console.log('*****************labId:', labId);
-                    const url = this.labSDK.getPlayerURL(labId);
+                    const url = this.labSDK.getPlayerURL({labId});
                     console.log('预览:', url);
                     $('#viewIframeId').attr('src', url);
                 }
@@ -602,14 +602,14 @@ class main {
                 $('#editBoxId').show();
                 if (labId) {
                     // 通过实验id打开实验
-                    const url = this.labSDK.getEditerURL(labId);
+                    const url  = this.labSDK.getEditerURL({labId});
                     console.log('~编辑实验:', url);
                     $('#editIframeId').attr('src', url);
                     this.freshEditData(); // 刷新使用场景数据
                 } else {
                     // 新建实验
                     const url = this.labSDK.getEditerURL();
-                    console.log('~新建实验:', url);
+                    console.log('~(新建实验老接口(将废弃)):', url);
                     $('#editIframeId').attr('src', url);
                     this.freshEditData();
                 }
@@ -619,7 +619,7 @@ class main {
                 $('#editBoxId').show();
                 if (labId) {
                     // 通过实验id打开实验
-                    const url = this.labSDK.getEditerURL(labId, true); // 来自于官方精品资源
+                    const url  = this.labSDK.getEditerURL({labId:labId, fromOfficia:true}); // 来自于官方精品资源
                     console.log('~官方列表:编辑实验:', url);
                     $('#editIframeId').attr('src', url);
                     this.freshEditData(); // 刷新使用场景数据
