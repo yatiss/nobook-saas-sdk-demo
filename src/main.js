@@ -60,8 +60,9 @@ class main {
                 debugSettings: {
                     DOC_DEBUG: true,
                     physics: {
-                        EDITER: 'http://localhost:3033',
-                        PLAYER: 'http://localhost:4800'
+                        EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
+                        // EDITER: 'http://localhost:3033',
+                        // PLAYER: 'http://localhost:4800'
                     },
                     chemical: {
                         EDITER: 'http://localhost:3030'
@@ -123,6 +124,7 @@ class main {
             // 编辑器或播放器实验场景初始化成功时触发
             console.log('******************页面加载完成!!!');
         });
+        this.showType(1);
     }
 
     /**
@@ -173,7 +175,6 @@ class main {
             console.log(evt.target.textContent);
             this.freshRightList(evt.target.value - 0);
         });
-        this.showType(1);
         // 返回按钮
         $('.return-cla ').off('click');
         $('.return-cla').click(() => {
@@ -588,7 +589,8 @@ class main {
      * @param type
      * @param labId
      */
-    showType(type, labId, grade) {
+    showType(type, labId) {
+        console.log('***********showType:', type);
         this.labId = labId;
         $('#listBoxId,#editBoxId,#playBoxId').hide();
         switch (type) {
