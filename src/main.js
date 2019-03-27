@@ -51,14 +51,22 @@ class main {
             // 先添加设置
             this.labSDK.setConfig({
                 // 登录部分(所有操作必须登陆后执行)
-                DEBUG: true,
-                EDITER_DEBUG: true,
-                EDIT_HOST_DEBUG: 'http://localhost:3033/',
+                // EDIT_HOST_DEBUG: 'http://localhost:3033/',
                 // PLAYER_DEBUG: true,
                 // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
-                from: '作业帮'
+                from: '作业帮',
+                debugSettings: {
+                    DOC_DEBUG: true,
+                    physics: {
+                        EDITER: 'http://localhost:3033',
+                        PLAYER: 'http://localhost:4800'
+                    },
+                    chemical: {
+                        EDITER: 'http://localhost:3030'
+                    }
+                }
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
@@ -609,7 +617,7 @@ class main {
                 } else {
                     // 新建实验
                     const url = this.labSDK.getEditerURL();
-                    console.log('~(新建实验老接口(将废弃)):', url);
+                    console.log('~新建实验:', url);
                     $('#editIframeId').attr('src', url);
                     this.freshEditData();
                 }
