@@ -57,6 +57,7 @@ class main {
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
                 from: '作业帮',
+                // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
                 debugSettings: {
                     DOC_DEBUG: true,
                     physics: {
