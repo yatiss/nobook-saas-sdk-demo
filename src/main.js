@@ -37,7 +37,7 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        this.uniqueId = 'zuotest2'; // 用户账户,必填
+        this.uniqueId = 'zuotest3'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
         // 初中物理 PID_TYPE.PHYSICAL1
@@ -59,14 +59,18 @@ class main {
                 from: '作业帮',
                 // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
                 debugSettings: {
-                    DOC_DEBUG: true,
+                    // DOC_DEBUG: true,
                     physics: {
-                        EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
-                        // EDITER: 'http://localhost:3033',
+                        EDITER_DOC: false,
+                        // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
+                        EDITER: 'http://192.168.5.180:3033',
                         // PLAYER: 'http://localhost:4800'
                     },
                     chemical: {
-                        EDITER: 'http://localhost:3030'
+                        EDITER_DOC: false,
+                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
+                    },
+                    biological: {
                     }
                 }
             });
