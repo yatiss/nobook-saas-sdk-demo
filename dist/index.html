@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NB对接接口Demo</title>
+    <link data-jsfiddle="common" rel="stylesheet" media="screen" href="main.css">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="lodash.core.min.js"></script>
+    <script src="layer-v2.2/layer.js"></script>
+    <script src="OutMain.js"></script>
+</head>
+<body>
+    <div id="listBoxId" class="box">
+        <div class="left-list">
+            <div class="module-class">
+                <div class="diy-cla"><button class="lab-btn" value="-1">我的实验</button></div>
+                <ui id="leftId"></ui>
+            </div>
+            <div class="chapter-class">
+            </div>
+        </div>
+        <div class="right-box">
+            <div id="labNumsId">实验数量: 0</div>
+            <div id="rightId" class="right-list"></div>
+        </div>
+        <div class="login-box">
+            <input class="use-cla">
+            <button class="login-btn">退出</button>
+            <label class="ni-cla"></label>
+        </div>
+        <div class="clear-cla">
+            清除redis缓存: <button id="clearDIYBtn">清除缓存</button>
+        </div>
+        <div class="search_cla">
+            <input id="searchDIYId"><button id="searchDIYBtn">搜索DIY</button>
+            <input id="searchSourceId"><button id="searchSourceBtn">搜索精品资源</button>
+        </div>
+        <div class="switch-chapter">
+            <button value="0">切换模块排版</button>
+            <button value="1">切换章节排版</button>
+        </div>
+        <ui class="switch-subject">
+        </ui>
+        <div class="bot-cla">
+            <button class="new-cla diy-cla">新建实验</button>
+        </div>
+    </div>
+    <div id="playBoxId" class="box">
+        <button class="return-cla">返回</button>
+        <button class="player-insert-cla insert-cla">插入实验</button>
+        <iframe id="viewIframeId"
+                allowFullScreen="true"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 100%;"></iframe>
+    </div>
+    <div id="editBoxId" class="box">
+        <button class="return-cla">返回</button>
+        <button class="save-cla">保存实验</button>
+        <iframe id="editIframeId"
+                allowFullScreen="true"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 100%;"></iframe>
+    </div>
+</body>
+</html>

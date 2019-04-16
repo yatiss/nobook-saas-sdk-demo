@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+li{
+    list-style-type:none;
+}
+.left-list {
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    border: 1px solid red;
+}
+.right-box {
+    border: 1px solid red;
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 30%;
+    overflow: scroll;
+}
+.right-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+#labNumsId {
+    font-size: 14px;
+    color: red;
+    margin: 5px;
+}
+.item{
+    width: 350px;
+    height: 200px;
+    position: relative;
+    border: 1px solid red;
+    margin: 5px;
+    background-size: cover;
+}
+.box {
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.bot-cla {
+    position: absolute;
+    bottom: 13px;
+    display: inline-block;
+}
+.use-cla {
+    margin-right: 10px;
+}
+.ni-cla{
+    margin-left: 10px;
+    font-size: 14px;
+    color: red;
+}
+.new-cla {
+}
+.check-cla {
+    left: 100px;
+    position: absolute;
+    bottom: 0;
+}
+.return-cla {
+    position: absolute;
+}
+.save-cla {
+    position: absolute;
+    left: 60px;
+}
+.div-name {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    bottom: 2px;
+    width: 280px;
+    color: #009688;
+    text-align: center;
+}
+.editClaSource {
+
+}
+.search_cla {
+    position: absolute;
+    bottom: 90px;
+    height: 25px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
+.switch-chapter {
+    position: absolute;
+    bottom: 60px;
+    height: 25px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
+.switch-subject {
+    position: absolute;
+    bottom: 38px;
+    height: 25px;
+    border: aquamarine 1px solid;
+}
+
+.switch-subject > li {
+    display: inline;
+}
+.se-cla {
+    width: 80px;
+}
+#seLabelId{
+    font-size: 14px;
+    color: red;
+    display: block;
+}
+.share-div{
+    color: red;
+    font-size: 14px;
+}
+.clear-cla {
+    position: absolute;
+    bottom: 123px;
+    height: 25px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
+.insert-cla{
+    position: absolute;
+    left: 100px;
+}
+.login-box{
+    position: absolute;
+    bottom: 154px;
+    height: 25px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}

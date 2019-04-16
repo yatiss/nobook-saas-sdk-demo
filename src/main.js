@@ -426,7 +426,7 @@ class main {
         } else {
             // 为官方资源
             this.labSDK.getResourcesByCategory({categoryId: categoryId}).then((obj) => {
-                this.addRightList(obj, false);
+                this.addRightList(obj.data, false);
             }).catch((err) => {
                 console.warn('~~~~~~~~getResourcesByCategory:', err);
             });
