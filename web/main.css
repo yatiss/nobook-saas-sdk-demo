@@ -70,6 +70,10 @@ li{
     position: absolute;
     left: 60px;
 }
+.getSaveContent-cla {
+    position: absolute;
+    left: 150px;
+}
 .div-name {
     position: absolute;
     transform: translate(-50%, -50%);

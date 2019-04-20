@@ -37,7 +37,7 @@ class main {
          *                              账户信息
          ************************************************************* */
         // 需传入信息
-        this.uniqueId = 'yiqitest3'; // 用户账户,必填
+        this.uniqueId = 'nobooktest3'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
         // 初中物理 PID_TYPE.PHYSICAL1
@@ -56,23 +56,24 @@ class main {
                 // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
-                from: '一起作业',
+                from: 'zuoyebang',
                 // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
-                // debugSettings: {
-                //     // DOC_DEBUG: true,
-                //     physics: {
-                //         EDITER_DOC: false,
-                //         EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
-                //         // EDITER: 'http://192.168.5.180:3033',
-                //         // PLAYER: 'http://localhost:4800'
-                //     },
-                //     chemical: {
-                //         EDITER_DOC: false,
-                //         EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
-                //     },
-                //     biological: {
-                //     }
-                // }
+                debugSettings: {
+                    // DOC_DEBUG: true,
+                    physics: {
+                        EDITER_DOC: false,
+                        // EDITER: 'https://wuli-cdn.nobook.com',
+                        // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
+                        EDITER: 'http://localhost:3033',
+                        // PLAYER: 'http://localhost:4800'
+                    },
+                    chemical: {
+                        EDITER_DOC: false,
+                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
+                    },
+                    biological: {
+                    }
+                }
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
@@ -204,6 +205,13 @@ class main {
             this.saveData().then((result) => {
                 console.log('~保存实验回调:', result);
                 layer.msg(`保存实验${result.success ? '成功' : '失败'}`);
+            });
+        });
+        $('.getSaveContent-cla').off('click');
+        $('.getSaveContent-cla').click(() => {
+            console.log('~获取实验内容');
+            this.getSaveContent().then((result) => {
+                console.log('~获取实验内容回调:', result);
             });
         });
         $('.switch-chapter').off('click');
@@ -713,6 +721,12 @@ class main {
         config = config || {};
         config.iframeWindow = $('#editIframeId')[0].contentWindow;
         return this.labSDK.saveData(config);
+    }
+
+    getSaveContent() {
+        const config = {};
+        config.iframeWindow = $('#editIframeId')[0].contentWindow;
+        return this.labSDK.getSaveContent(config);
     }
 
     /**
