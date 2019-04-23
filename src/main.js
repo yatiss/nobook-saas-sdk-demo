@@ -56,24 +56,7 @@ class main {
                 // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
-                from: 'zuoyebang',
-                // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
-                debugSettings: {
-                    // DOC_DEBUG: true,
-                    physics: {
-                        EDITER_DOC: false,
-                        // EDITER: 'https://wuli-cdn.nobook.com',
-                        // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
-                        EDITER: 'http://localhost:3033',
-                        // PLAYER: 'http://localhost:4800'
-                    },
-                    chemical: {
-                        EDITER_DOC: false,
-                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
-                    },
-                    biological: {
-                    }
-                }
+                from: 'chuangerxin'
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {

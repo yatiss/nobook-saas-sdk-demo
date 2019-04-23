@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cccdb77c0b2f3a0f0567"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a1dc80621d2ce3d01d46"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -771,6 +771,8 @@ var PID_VALUE = {
 var MESSAGE_TYPE = {
     SAVE_DATA: 'PHYSICS_SDK_INTERFACE_SAVE',
     SAVE_DATA_RESPONSE: 'PHYSICS_SDK_INTERFACE_SAVE_RESPONSE',
+    DATA_REQUEST: 'PHYSICS_SDK_INTERFACE_DATA_REQUEST',
+    DATA_REQUEST_RESPONSE: 'PHYSICS_SDK_INTERFACE_DATA_REQUEST_RESPONSE',
     NOBOOK_SUBMIT: 'nobook.submit',
     NOBOOK_SUBMIT_RESPONSE: 'nobook.submit_response',
     NOBOOK_ONE_STEP_CORRECT: 'nobook.oneStepCorrect',
@@ -18509,6 +18511,7 @@ var LabSDK = (function (_super) {
     function LabSDK() {
         var _this = _super.call(this) || this;
         _this._saveData_resolve = null;
+        _this._getSaveContent_resolve = null;
         _this._canDIY = false;
         _this.addListeners();
         return _this;
@@ -18556,6 +18559,10 @@ var LabSDK = (function (_super) {
             else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD) {
                 _this.emit(__WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD, event);
             }
+            else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST_RESPONSE) {
+                _this._getSaveContent_resolve(data.result);
+                _this._getSaveContent_resolve = null;
+            }
         });
     };
     LabSDK.prototype.switchSubject = function (param) {
@@ -18583,6 +18590,20 @@ var LabSDK = (function (_super) {
             if (config && config.title) {
                 data.title = config.title;
             }
+            config.iframeWindow.postMessage(data, '*');
+        });
+    };
+    LabSDK.prototype.getSaveContent = function (config) {
+        var _this = this;
+        if (this._getSaveContent_resolve) {
+            return Promise.resolve({
+                success: false,
+                msg: '获取实验内容接口正在执行'
+            });
+        }
+        return new Promise(function (resolve) {
+            _this._getSaveContent_resolve = resolve;
+            var data = { type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST };
             config.iframeWindow.postMessage(data, '*');
         });
     };
@@ -18898,22 +18919,24 @@ class main {
                 // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: __WEBPACK_IMPORTED_MODULE_2__server__["a" /* SECRET_DATA */].appKey, // nobook 提供
-                from: 'zuoyebang',
+                from: 'zuoyebang'
                 // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
-                debugSettings: {
-                    // DOC_DEBUG: true,
-                    physics: {
-                        EDITER_DOC: false,
-                        EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]'
-                        // EDITER: 'http://192.168.5.180:3033',
-                        // PLAYER: 'http://localhost:4800'
-                    },
-                    chemical: {
-                        EDITER_DOC: false,
-                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
-                    },
-                    biological: {}
-                }
+                /*   debugSettings: {
+                       // DOC_DEBUG: true,
+                       physics: {
+                           EDITER_DOC: false,
+                           // EDITER: 'https://wuli-cdn.nobook.com',
+                           // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
+                           EDITER: 'http://localhost:3033',
+                           // PLAYER: 'http://localhost:4800'
+                       },
+                       chemical: {
+                           EDITER_DOC: false,
+                           EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
+                       },
+                       biological: {
+                       }
+                   }*/
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
@@ -19045,6 +19068,13 @@ class main {
             this.saveData().then(result => {
                 console.log('~保存实验回调:', result);
                 layer.msg(`保存实验${result.success ? '成功' : '失败'}`);
+            });
+        });
+        $('.getSaveContent-cla').off('click');
+        $('.getSaveContent-cla').click(() => {
+            console.log('~获取实验内容');
+            this.getSaveContent().then(result => {
+                console.log('~获取实验内容回调:', result);
             });
         });
         $('.switch-chapter').off('click');
@@ -19547,6 +19577,12 @@ class main {
         config = config || {};
         config.iframeWindow = $('#editIframeId')[0].contentWindow;
         return this.labSDK.saveData(config);
+    }
+
+    getSaveContent() {
+        const config = {};
+        config.iframeWindow = $('#editIframeId')[0].contentWindow;
+        return this.labSDK.getSaveContent(config);
     }
 
     /**
