@@ -134,6 +134,10 @@ li{
     position: absolute;
     left: 100px;
 }
+.jump-cla{
+    position: absolute;
+    left: 200px;
+}
 .login-box{
     position: absolute;
     bottom: 154px;
@@ -141,4 +145,16 @@ li{
     padding-left: 10px;
     margin-bottom: 10px;
     border: #cf2727 1px solid;
+}
+
+.migration-box{
+    position: absolute;
+    bottom: 188px;
+    height: 25px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: #cf2727 1px solid;
+}
+.migration-cla {
+    margin-right: 10px;
 }

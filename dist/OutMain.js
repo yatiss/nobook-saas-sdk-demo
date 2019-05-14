@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a1dc80621d2ce3d01d46"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "230cd7eb0dbeb3a275a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(10)(__webpack_require__.s = 10);
+/******/ 	return hotCreateRequire(6)(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -786,13 +786,12 @@ var MESSAGE_TYPE = {
 };
 var GLOBAL_HOST = {
     DOC_HOST: 'https://resourceapi.nobook.com',
-    DOC_HOST_DEBUG: 'http://resourceapi.nobook.cc',
+    DOC_HOST_DEBUG: 'http://resourceapi.nobook.cc'
 };
 var GLOBAL_DOCURL = {
     loginURL: '/api/v1/login',
     logoutURL: '/api/v1/logout'
 };
-
 
 /***/ }),
 /* 1 */
@@ -1083,6 +1082,33 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -18194,63 +18220,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(13)(module)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(11)(module)))
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lab_sdk__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(0);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__lab_sdk__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["d"]; });
-
-
-
-if (typeof window === 'object') {
-    window.NB_SDK_LAB = {
-        APPKEY_TEST: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* APPKEY_TEST */],
-        APPSECRET_TEST: __WEBPACK_IMPORTED_MODULE_1__config__["b" /* APPSECRET_TEST */],
-        LabSDK: __WEBPACK_IMPORTED_MODULE_0__lab_sdk__["a" /* LabSDK */],
-        PID_TYPE: __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */],
-        MESSAGE_TYPE: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */]
-    };
-}
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18263,8 +18236,8 @@ if (typeof window === 'object') {
  *      即 appSecret 必须要隐藏, 即签名sign为后端输出
  ******************************************************* */
 const SECRET_DATA = {
-  appKey: '111', // nobook提供
-  appSecret: 'weqwew' // 重要注意: nobook提供(appSecret需后台保存,如果前台暴露引发任何损失概不负责)
+  appKey: '496484', // nobook提供
+  appSecret: '215e470dec1e775e' // 重要注意: nobook提供(appSecret需后台保存,如果前台暴露引发任何损失概不负责)
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = SECRET_DATA;
 
@@ -18287,590 +18260,40 @@ function getServerData(uniqueId, nickname, pidScope) {
 }
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SDKBase; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_eventemitter3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-
-var SDKBase = (function (_super) {
-    __extends(SDKBase, _super);
-    function SDKBase() {
-        var _this = _super.call(this) || this;
-        _this.DEBUG = false;
-        _this.token = null;
-        return _this;
-    }
-    SDKBase.prototype.setConfig = function (config) {
-        this.debugSettings = config.debugSettings || {};
-        this.DEBUG = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["get"])(config, 'debugSettings.DOC_DEBUG', false);
-        this.appKey = config.appKey;
-        this.pidType = config.pidType;
-        this.docHost = this.DEBUG ? __WEBPACK_IMPORTED_MODULE_2__config__["g" /* GLOBAL_HOST */].DOC_HOST_DEBUG : __WEBPACK_IMPORTED_MODULE_2__config__["g" /* GLOBAL_HOST */].DOC_HOST;
-        for (var _i = 0, _a = Object.keys(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */]); _i < _a.length; _i++) {
-            var key = _a[_i];
-            __WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */][key] = this.docHost + __WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */][key];
-        }
-    };
-    SDKBase.prototype.login = function (param) {
-        var _this = this;
-        this.nickname = param.nickname;
-        var allNeedParam = {
-            appKey: this.appKey,
-            uniqueId: param.uniqueId,
-            timestamp: param.timestamp,
-            sign: param.sign,
-            nickname: param.nickname,
-            pidScope: param.pidScope,
-            usertype: 0
-        };
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */].loginURL, allNeedParam).then(function (obj) {
-            var dataObj = obj.data;
-            _this.token = dataObj.token;
-            _this.uid = dataObj.userinfo.userid;
-            return obj;
-        });
-    };
-    SDKBase.prototype.logout = function () {
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */].logoutURL, { token: this.token });
-    };
-    SDKBase.prototype.$get = function (url, param) {
-        return this.$server({
-            method: 'get',
-            url: url,
-            param: param
-        });
-    };
-    SDKBase.prototype.$post = function (url, param) {
-        return this.$server({
-            method: 'post',
-            url: url,
-            param: param
-        });
-    };
-    SDKBase.prototype.$server = function (param) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            __WEBPACK_IMPORTED_MODULE_1_jquery__[param.method](param.url, param.param, function (dataStr, status) {
-                if (status === 'success') {
-                    var data = _this.jsonObj(dataStr);
-                    if (data.code === 0) {
-                        var dataObj = data.data;
-                        resolve({
-                            success: true,
-                            data: dataObj
-                        });
-                    }
-                    else {
-                        reject({
-                            success: false,
-                            msg: data.msg
-                        });
-                    }
-                }
-                else {
-                    reject({
-                        success: false,
-                        msg: status
-                    });
-                }
-            });
-        });
-    };
-    SDKBase.prototype.jsonObj = function (data) {
-        return Object.prototype.toString.call(data) === '[object String]' ? JSON.parse(data) : data;
-    };
-    SDKBase.prototype.isArray = function (obj) {
-        return Object.prototype.toString.call(obj) === '[object Array]';
-    };
-    return SDKBase;
-}(__WEBPACK_IMPORTED_MODULE_0_eventemitter3__));
-
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SDKBase__ = __webpack_require__(6);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__SDKBase__["a"]; });
-
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return host; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return docURL; });
-var host = {
-    'PHYSICAL1': {
-        EDIT_END_NAME: 'physics-courseware',
-        ICON_HOST: 'https://wuli.nobook.com',
-        EDIT_HOST: 'https://wuli.nobook.com',
-        PLAYER_HOST: 'https://wuliplayercdn.nobook.com'
-    },
-    'PHYSICAL2': {
-        EDIT_END_NAME: 'physics-courseware',
-        ICON_HOST: 'https://wuli.nobook.com',
-        EDIT_HOST: 'https://wuli.nobook.com',
-        PLAYER_HOST: 'https://wuliplayercdn.nobook.com'
-    },
-    'CHEMICAL1': {
-        EDIT_END_NAME: 'chemical-courseware',
-        ICON_HOST: 'https://huaxue.nobook.com',
-        EDIT_HOST: 'https://huaxue.nobook.com',
-        PLAYER_HOST: 'https://huaxueplayercdn.nobook.com'
-    },
-    'CHEMICAL2': {
-        EDIT_END_NAME: 'chemical-courseware',
-        ICON_HOST: 'https://huaxue.nobook.com',
-        EDIT_HOST: 'https://huaxue.nobook.com',
-        PLAYER_HOST: 'https://huaxueplayercdn.nobook.com'
-    },
-    'BIOLOGICAL1': {
-        ICON_HOST: 'https://res-api.nobook.com/sw/cz/libs/biology',
-        PLAYER_HOST: 'https://shengwuv2-cz.nobook.com/libs/biology',
-        PLAYER_HOST_DEBUG: 'http://shengwu-cz.nobook.cc/libs/biology'
-    },
-    'BIOLOGICAL2': {
-        ICON_HOST: 'https://res-api.nobook.com/sw/gz/libs/biology',
-        PLAYER_HOST: 'https://shengwuv2-gz.nobook.com/libs/biology',
-        PLAYER_HOST_DEBUG: 'http://shengwu-gz.nobook.cc/libs/biology'
-    }
-};
-var docURL = {
-    searchDIYURL: "/api/v1/myexperiment/search",
-    getListDIYURL: "/api/v1/myexperiment/get",
-    delLabDataDIYURL: "/api/v1/myexperiment/del",
-    renameDIYURL: "/api/v1/myexperiment/rename",
-    shareDIYURL: "/api/v1/myexperiment/share",
-    getInfoDIYURL: "/api/v1/myexperiment/info",
-    clearRedisURL: '/api/v1/myexperiment/clearCache',
-    getResourcesByChapterURL: "/api/v1/resources/listbychapterid",
-    getResourcesByCategoryURL: "/api/v1/resources/listbycategoryid",
-    getChapterURL: "/api/v1/resources/chapter",
-    classificationsURL: "/api/v1/resources/experimentcategory",
-    searchResourcesURL: "/api/v1/resources/search",
-    getInfoResourcesURL: "/api/v1/resources/info"
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LabSDK; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lab_sdk__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lab_config__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_base64__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_base64___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_js_base64__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__base__ = __webpack_require__(7);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__lab_sdk__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_1__config__["d"]; });
 
 
 
-
-
-var LabSDK = (function (_super) {
-    __extends(LabSDK, _super);
-    function LabSDK() {
-        var _this = _super.call(this) || this;
-        _this._saveData_resolve = null;
-        _this._getSaveContent_resolve = null;
-        _this._canDIY = false;
-        _this.addListeners();
-        return _this;
-    }
-    LabSDK.prototype.setConfig = function (config) {
-        _super.prototype.setConfig.call(this, config);
-        this.from = config.from;
-        this.freshPidConfig();
-        for (var _i = 0, _a = Object.keys(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */]); _i < _a.length; _i++) {
-            var key = _a[_i];
-            __WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */][key] = this.docHost + __WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */][key];
-        }
+if (typeof window === 'object') {
+    window.NB_SDK_LAB = {
+        APPKEY_TEST: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* APPKEY_TEST */],
+        APPSECRET_TEST: __WEBPACK_IMPORTED_MODULE_1__config__["b" /* APPSECRET_TEST */],
+        LabSDK: __WEBPACK_IMPORTED_MODULE_0__lab_sdk__["a" /* LabSDK */],
+        PID_TYPE: __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */],
+        MESSAGE_TYPE: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */]
     };
-    LabSDK.prototype.freshPidConfig = function () {
-        this._canDIY = this.isPhysical() || this.isChemical();
-        this.editEndName = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].EDIT_END_NAME;
-        this.iconHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].ICON_HOST;
-        if (this.DEBUG) {
-            this.iconHost = this.iconHost.replace('https', 'http');
-            this.iconHost = this.iconHost.replace('.com', '.cc');
-        }
-        if (this.debugEditerHost.length) {
-            this.editHost = this.debugEditerHost;
-            this.editHost = this.editHost.replace('https', 'http');
-        }
-        else {
-            this.editHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].EDIT_HOST;
-        }
-        if (this.debugPlayerHost.length) {
-            this.playerHost = this.debugPlayerHost;
-            this.playerHost = this.playerHost.replace('https', 'http');
-        }
-        else {
-            this.playerHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].PLAYER_HOST;
-        }
-    };
-    LabSDK.prototype.addListeners = function () {
-        var _this = this;
-        window.addEventListener('message', function (event) {
-            var data = event.data || {};
-            if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].SAVE_DATA_RESPONSE) {
-                _this._saveData_resolve(data.result);
-                _this._saveData_resolve = null;
-            }
-            else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD) {
-                _this.emit(__WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD, event);
-            }
-            else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST_RESPONSE) {
-                _this._getSaveContent_resolve(data.result);
-                _this._getSaveContent_resolve = null;
-            }
-        });
-    };
-    LabSDK.prototype.switchSubject = function (param) {
-        this.pidType = param.pidType;
-        this.freshPidConfig();
-    };
-    LabSDK.prototype.deleteData = function (param) {
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].delLabDataDIYURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            token: this.token,
-            id: param.labId
-        });
-    };
-    LabSDK.prototype.saveData = function (config) {
-        var _this = this;
-        if (this._saveData_resolve) {
-            return Promise.resolve({
-                success: false,
-                msg: '已有实验正在保存'
-            });
-        }
-        return new Promise(function (resolve) {
-            _this._saveData_resolve = resolve;
-            var data = { type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].SAVE_DATA };
-            if (config && config.title) {
-                data.title = config.title;
-            }
-            config.iframeWindow.postMessage(data, '*');
-        });
-    };
-    LabSDK.prototype.getSaveContent = function (config) {
-        var _this = this;
-        if (this._getSaveContent_resolve) {
-            return Promise.resolve({
-                success: false,
-                msg: '获取实验内容接口正在执行'
-            });
-        }
-        return new Promise(function (resolve) {
-            _this._getSaveContent_resolve = resolve;
-            var data = { type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST };
-            config.iframeWindow.postMessage(data, '*');
-        });
-    };
-    LabSDK.prototype.renameData = function (param) {
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].renameDIYURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            token: this.token,
-            id: param.labId,
-            title: param.newTitle
-        });
-    };
-    LabSDK.prototype.getChapter = function () {
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getChapterURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
-            token: this.token
-        });
-    };
-    LabSDK.prototype.clearRedis = function () {
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].clearRedisURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            token: this.token
-        });
-    };
-    LabSDK.prototype.getClassificationsList = function () {
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].classificationsURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
-            token: this.token
-        });
-    };
-    LabSDK.prototype.getResourcesByCategory = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getResourcesByCategoryURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
-            categoryId: param.categoryId
-        }).then(function (obj) {
-            if (_this.isBiological()) {
-                var dataObj = obj.data;
-                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
-                    dataObj.data.forEach(function (item) {
-                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
-                    });
-                }
-            }
-            return obj;
-        });
-    };
-    LabSDK.prototype.searchDIY = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].searchDIYURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            keyword: param.keyword
-        }).then(function (obj) {
-            if (_this.isBiological()) {
-                var dataObj = obj.data;
-                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
-                    dataObj.data.forEach(function (item) {
-                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
-                    });
-                }
-            }
-            return obj;
-        });
-    };
-    LabSDK.prototype.searchResources = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].searchResourcesURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
-            keyword: param.keyword
-        }).then(function (obj) {
-            if (_this.isBiological()) {
-                var dataObj = obj.data;
-                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
-                    dataObj.data.forEach(function (item) {
-                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
-                    });
-                }
-            }
-            return obj;
-        });
-    };
-    LabSDK.prototype.getResourcesByChapter = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getResourcesByChapterURL, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])({
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source
-        }, param)).then(function (obj) {
-            if (_this.isBiological()) {
-                var dataObj = obj.data;
-                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
-                    dataObj.data.forEach(function (item) {
-                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
-                    });
-                }
-            }
-            return obj;
-        });
-    };
-    LabSDK.prototype.getDIYLabList = function (param) {
-        if (!this._canDIY) {
-            return Promise.reject({
-                success: false,
-                msg: '只有可DIY学科才有我的实验目录'
-            });
-        }
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getListDIYURL, {
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            token: this.token,
-            page: param.page,
-            perPage: param.perPage
-        });
-    };
-    LabSDK.prototype.getInfoResources = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getInfoResourcesURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
-            id: param.labId
-        }).then(function (obj) {
-            var dataObj = obj.data;
-            if (!dataObj.hasOwnProperty('containsVipequ') && _this.isPhysical()) {
-                dataObj.containsVipequ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'content.phyData.properties.data.containsVipequ', false);
-            }
-            dataObj.iconfull = _this.getOfficiaIconURL(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'properties.icon.url'));
-            return obj;
-        });
-    };
-    LabSDK.prototype.getInfoDIY = function (param) {
-        var _this = this;
-        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getInfoDIYURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            id: param.labId
-        }).then(function (obj) {
-            var dataObj = obj.data;
-            if (!dataObj.hasOwnProperty('containsVipequ') && _this.isPhysical()) {
-                dataObj.containsVipequ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'content.phyData.properties.data.containsVipequ', false);
-            }
-            dataObj.iconfull = _this.getOfficiaIconURL(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'properties.icon.url'));
-            return obj;
-        });
-    };
-    LabSDK.prototype.shareDIY = function (param) {
-        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].shareDIYURL, {
-            token: this.token,
-            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
-            uniqueId: param.uniqueId,
-            id: param.labId
-        });
-    };
-    LabSDK.prototype.freshEditerScreen = function (config) {
-        config.iframeWindow.postMessage({ type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].PHYSICS_SDK_INTERFACE_FRESH_DATA }, '*');
-    };
-    LabSDK.prototype.getEditerURL = function (config) {
-        var labId = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(config, 'labId', '');
-        var editURL = this.editHost + "/#/" + this.editEndName + "?token=" + this.token + "&uid=" + this.uid + "&labid=" + labId;
-        if (this.editerDoc) {
-            editURL += '&EDITER_DEBUG=1';
-        }
-        if (config && config.hasOwnProperty('fromOfficia')) {
-            editURL += '&sourcefrom=1';
-        }
-        editURL += '&grade=' + this.grade;
-        editURL += '&sdkv1=1';
-        editURL += '&pidtype=' + this.pidType;
-        return editURL;
-    };
-    LabSDK.prototype.getPlayerURL = function (config) {
-        if (this.isBiological()) {
-            return __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].PLAYER_HOST + "?sourceid=" + config.labId + "&token=" + this.token + "&type=" + this.from;
-        }
-        var playerURL = this.playerHost + "?type=" + this.from + "&sourceid=" + config.labId;
-        return playerURL;
-    };
-    LabSDK.prototype.getOfficiaIconURL = function (icon) {
-        if (/^http/ig.test(icon)) {
-            return icon;
-        }
-        if (this.isBiological()) {
-            return __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].ICON_HOST + "/" + icon;
-        }
-        return "" + this.iconHost + icon;
-    };
-    LabSDK.prototype.getDIYIconURL = function (iconURL) {
-        if (/^http/ig.test(iconURL)) {
-            return iconURL;
-        }
-        return "" + this.iconHost + iconURL;
-    };
-    LabSDK.prototype.getAllLabPidScope = function () {
-        var list = [];
-        [
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL1,
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL2,
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL1,
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL2,
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL1,
-            __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL2
-        ].forEach(function (item) {
-            list.push(__WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][item].lab, __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][item].source);
-        });
-        return list.join(',');
-    };
-    Object.defineProperty(LabSDK.prototype, "canDIY", {
-        get: function () {
-            return this._canDIY;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    LabSDK.prototype.isPhysical = function () {
-        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL2;
-    };
-    LabSDK.prototype.isChemical = function () {
-        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL2;
-    };
-    LabSDK.prototype.isBiological = function () {
-        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL2;
-    };
-    Object.defineProperty(LabSDK.prototype, "grade", {
-        get: function () {
-            return __WEBPACK_IMPORTED_MODULE_1__config__["f" /* LAB_TYPE_GRADE */][this.pidType];
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LabSDK.prototype, "debugEditerHost", {
-        get: function () {
-            return "" + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'EDITER', '');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LabSDK.prototype, "debugPlayerHost", {
-        get: function () {
-            return "" + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'PLAYER', '');
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LabSDK.prototype, "editerDoc", {
-        get: function () {
-            if (!this.debugEditerHost.length) {
-                return false;
-            }
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'EDITER_DOC', true);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    return LabSDK;
-}(__WEBPACK_IMPORTED_MODULE_4__base__["a" /* SDKBase */]));
-
-
+}
 
 /***/ }),
-/* 10 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blueimp_md5__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_blueimp_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_blueimp_md5__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nobook_nobook_saas_sdk_nobook_lab__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__server__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nobook_nobook_saas_sdk_nobook_lab__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__server__ = __webpack_require__(4);
 
 // 1、es6 或 ts 引用方式
 
@@ -18921,22 +18344,22 @@ class main {
                 appKey: __WEBPACK_IMPORTED_MODULE_2__server__["a" /* SECRET_DATA */].appKey, // nobook 提供
                 from: 'zuoyebang'
                 // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
-                /*   debugSettings: {
-                       // DOC_DEBUG: true,
-                       physics: {
-                           EDITER_DOC: false,
-                           // EDITER: 'https://wuli-cdn.nobook.com',
-                           // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.2]-F-[develop]-C-[]',
-                           EDITER: 'http://localhost:3033',
-                           // PLAYER: 'http://localhost:4800'
-                       },
-                       chemical: {
-                           EDITER_DOC: false,
-                           EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.2]-F-[develop-v2]-C-[develop-v2]'
-                       },
-                       biological: {
-                       }
-                   }*/
+                /*debugSettings: {
+                    DOC_DEBUG: true,
+                    physics: {
+                        EDITER_DOC: false,
+                        // EDITER: 'https://wuli-cdn.nobook.com',
+                        // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.3]-F-[develop]-C-[]',
+                        EDITER: 'http://localhost:3033',
+                        // PLAYER: 'http://localhost:4800'
+                    },
+                    chemical: {
+                        EDITER_DOC: false,
+                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.3]-F-[develop-v2]-C-[develop-v2]'
+                    },
+                    biological: {
+                    }
+                }*/
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
@@ -19002,6 +18425,18 @@ class main {
     freshBtnHandles() {
         // 登录
         $('.use-cla').val(this.uniqueId);
+        // 用户迁移按钮
+        $('.migration-btn').off('click');
+        $('.migration-btn').click(evt => {
+            let toUniqueId = $('.migration-cla').val();
+            toUniqueId = toUniqueId.trim();
+            if (toUniqueId.length > 0) {
+                console.log('****用户数据迁移, 目标用户:', toUniqueId);
+                this.migration(toUniqueId);
+            } else {
+                layer.alert('目标用户不能为空');
+            }
+        });
         // 登录按钮
         $('.login-btn').off('click');
         $('.login-btn').click(evt => {
@@ -19061,6 +18496,13 @@ class main {
         $('.player-insert-cla').off('click');
         $('.player-insert-cla').click(() => {
             console.log('~播放器插入实验:', this.labId);
+        });
+        // 播放器生物跳转第二页
+        $('.jump-cla').off('click');
+        $('.jump-cla').click(() => {
+            console.log('~跳转第二页:', this.labId);
+            window.frames.document.getElementById('test-btn-id').click();
+            // $('#viewIframeId')[0].contentWindow.getElementById('test-btn-id').click();
         });
         $('.save-cla').off('click');
         $('.save-cla').click(() => {
@@ -19468,9 +18910,13 @@ class main {
                 break;
             case 2:
                 $('#playBoxId').show();
+                if (this.pidType === __WEBPACK_IMPORTED_MODULE_1__nobook_nobook_saas_sdk_nobook_lab__["b" /* PID_TYPE */].BIOLOGICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__nobook_nobook_saas_sdk_nobook_lab__["b" /* PID_TYPE */].BIOLOGICAL2) {
+                    $('.jump-cla').show();
+                } else {
+                    $('.jump-cla').hide();
+                }
                 if (labId) {
                     // 打开实验
-                    console.log('*****************labId:', labId);
                     const url = this.labSDK.getPlayerURL({ labId });
                     console.log('预览:', url);
                     $('#viewIframeId').attr('src', url);
@@ -19646,6 +19092,12 @@ class main {
         });
     }
 
+    migration(toUniqueId) {
+        return this.labSDK.migration({
+            toUniqueId: toUniqueId
+        });
+    }
+
     clearRedis() {
         this.labSDK.clearRedis().then(data => {
             console.log('~~~clear result:', data);
@@ -19664,7 +19116,609 @@ class main {
 new main();
 
 /***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SDKBase; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_eventemitter3__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
+var __extends = this && this.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+
+
+
+
+var SDKBase = function (_super) {
+    __extends(SDKBase, _super);
+    function SDKBase() {
+        var _this = _super.call(this) || this;
+        _this.DEBUG = false;
+        _this.token = null;
+        return _this;
+    }
+    SDKBase.prototype.setConfig = function (config) {
+        this.debugSettings = config.debugSettings || {};
+        this.DEBUG = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_lodash__["get"])(config, 'debugSettings.DOC_DEBUG', false);
+        this.appKey = config.appKey;
+        this.pidType = config.pidType;
+        this.docHost = this.DEBUG ? __WEBPACK_IMPORTED_MODULE_2__config__["g" /* GLOBAL_HOST */].DOC_HOST_DEBUG : __WEBPACK_IMPORTED_MODULE_2__config__["g" /* GLOBAL_HOST */].DOC_HOST;
+        for (var _i = 0, _a = Object.keys(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */]); _i < _a.length; _i++) {
+            var key = _a[_i];
+            __WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */][key] = this.docHost + __WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */][key];
+        }
+    };
+    SDKBase.prototype.login = function (param) {
+        var _this = this;
+        this.nickname = param.nickname;
+        var allNeedParam = {
+            appKey: this.appKey,
+            uniqueId: param.uniqueId,
+            timestamp: param.timestamp,
+            sign: param.sign,
+            nickname: param.nickname,
+            pidScope: param.pidScope,
+            usertype: 0
+        };
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */].loginURL, allNeedParam).then(function (obj) {
+            var dataObj = obj.data;
+            _this.token = dataObj.token;
+            _this.uid = dataObj.userinfo.userid;
+            return obj;
+        });
+    };
+    SDKBase.prototype.logout = function () {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__config__["h" /* GLOBAL_DOCURL */].logoutURL, { token: this.token });
+    };
+    SDKBase.prototype.$get = function (url, param) {
+        return this.$server({
+            method: 'get',
+            url: url,
+            param: param
+        });
+    };
+    SDKBase.prototype.$post = function (url, param) {
+        return this.$server({
+            method: 'post',
+            url: url,
+            param: param
+        });
+    };
+    SDKBase.prototype.$server = function (param) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            __WEBPACK_IMPORTED_MODULE_1_jquery__[param.method](param.url, param.param, function (dataStr, status) {
+                if (status === 'success') {
+                    var data = _this.jsonObj(dataStr);
+                    if (data.code === 0) {
+                        var dataObj = data.data;
+                        resolve({
+                            success: true,
+                            data: dataObj
+                        });
+                    } else {
+                        reject({
+                            success: false,
+                            msg: data.msg
+                        });
+                    }
+                } else {
+                    reject({
+                        success: false,
+                        msg: status
+                    });
+                }
+            });
+        });
+    };
+    SDKBase.prototype.jsonObj = function (data) {
+        return Object.prototype.toString.call(data) === '[object String]' ? JSON.parse(data) : data;
+    };
+    SDKBase.prototype.isArray = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+    };
+    return SDKBase;
+}(__WEBPACK_IMPORTED_MODULE_0_eventemitter3__);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SDKBase__ = __webpack_require__(7);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__SDKBase__["a"]; });
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return host; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return docURL; });
+var host = {
+    'PHYSICAL1': {
+        EDIT_END_NAME: 'physics-courseware',
+        ICON_HOST: 'https://wuli.nobook.com',
+        EDIT_HOST: 'https://wuli.nobook.com',
+        PLAYER_HOST: 'https://wuliplayercdn.nobook.com'
+    },
+    'PHYSICAL2': {
+        EDIT_END_NAME: 'physics-courseware',
+        ICON_HOST: 'https://wuli.nobook.com',
+        EDIT_HOST: 'https://wuli.nobook.com',
+        PLAYER_HOST: 'https://wuliplayercdn.nobook.com'
+    },
+    'CHEMICAL1': {
+        EDIT_END_NAME: 'chemical-courseware',
+        ICON_HOST: 'https://huaxue.nobook.com',
+        EDIT_HOST: 'https://huaxue.nobook.com',
+        PLAYER_HOST: 'https://huaxueplayercdn.nobook.com'
+    },
+    'CHEMICAL2': {
+        EDIT_END_NAME: 'chemical-courseware',
+        ICON_HOST: 'https://huaxue.nobook.com',
+        EDIT_HOST: 'https://huaxue.nobook.com',
+        PLAYER_HOST: 'https://huaxueplayercdn.nobook.com'
+    },
+    'BIOLOGICAL1': {
+        ICON_HOST: 'https://res-api.nobook.com/sw/cz/libs/biology',
+        PLAYER_HOST: 'https://shengwuv2-cz.nobook.com/libs/biology',
+        PLAYER_HOST_DEBUG: 'http://shengwu-cz.nobook.cc/libs/biology'
+    },
+    'BIOLOGICAL2': {
+        ICON_HOST: 'https://res-api.nobook.com/sw/gz/libs/biology',
+        PLAYER_HOST: 'https://shengwuv2-gz.nobook.com/libs/biology',
+        PLAYER_HOST_DEBUG: 'http://shengwu-gz.nobook.cc/libs/biology'
+    }
+};
+var docURL = {
+    searchDIYURL: "/api/v1/myexperiment/search",
+    getListDIYURL: "/api/v1/myexperiment/get",
+    delLabDataDIYURL: "/api/v1/myexperiment/del",
+    renameDIYURL: "/api/v1/myexperiment/rename",
+    shareDIYURL: "/api/v1/myexperiment/share",
+    getInfoDIYURL: "/api/v1/myexperiment/info",
+    clearRedisURL: '/api/v1/myexperiment/clearCache',
+    migrationURL: '/api/v1/myexperiment/migration',
+    getResourcesByChapterURL: "/api/v1/resources/listbychapterid",
+    getResourcesByCategoryURL: "/api/v1/resources/listbycategoryid",
+    getChapterURL: "/api/v1/resources/chapter",
+    classificationsURL: "/api/v1/resources/experimentcategory",
+    searchResourcesURL: "/api/v1/resources/search",
+    getInfoResourcesURL: "/api/v1/resources/info"
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LabSDK; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lab_config__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_base64__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_js_base64___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_js_base64__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__base__ = __webpack_require__(8);
+var __extends = this && this.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+
+
+
+
+
+var LabSDK = function (_super) {
+    __extends(LabSDK, _super);
+    function LabSDK() {
+        var _this = _super.call(this) || this;
+        _this._saveData_resolve = null;
+        _this._getSaveContent_resolve = null;
+        _this._canDIY = false;
+        _this.addListeners();
+        return _this;
+    }
+    LabSDK.prototype.setConfig = function (config) {
+        _super.prototype.setConfig.call(this, config);
+        this.from = config.from;
+        this.freshPidConfig();
+        for (var _i = 0, _a = Object.keys(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */]); _i < _a.length; _i++) {
+            var key = _a[_i];
+            __WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */][key] = this.docHost + __WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */][key];
+        }
+    };
+    LabSDK.prototype.freshPidConfig = function () {
+        this._canDIY = this.isPhysical() || this.isChemical();
+        this.editEndName = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].EDIT_END_NAME;
+        this.iconHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].ICON_HOST;
+        if (this.DEBUG) {
+            this.iconHost = this.iconHost.replace('https', 'http');
+            this.iconHost = this.iconHost.replace('.com', '.cc');
+        }
+        if (this.debugEditerHost.length) {
+            this.editHost = this.debugEditerHost;
+            this.editHost = this.editHost.replace('https', 'http');
+        } else {
+            this.editHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].EDIT_HOST;
+        }
+        if (this.debugPlayerHost.length) {
+            this.playerHost = this.debugPlayerHost;
+            this.playerHost = this.playerHost.replace('https', 'http');
+        } else {
+            this.playerHost = __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].PLAYER_HOST;
+        }
+    };
+    LabSDK.prototype.addListeners = function () {
+        var _this = this;
+        window.addEventListener('message', function (event) {
+            var data = event.data || {};
+            if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].SAVE_DATA_RESPONSE) {
+                _this._saveData_resolve(data.result);
+                _this._saveData_resolve = null;
+            } else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD) {
+                _this.emit(__WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].ON_LOAD, event);
+            } else if (data.type === __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST_RESPONSE) {
+                _this._getSaveContent_resolve(data.result);
+                _this._getSaveContent_resolve = null;
+            }
+        });
+    };
+    LabSDK.prototype.switchSubject = function (param) {
+        this.pidType = param.pidType;
+        this.freshPidConfig();
+    };
+    LabSDK.prototype.deleteData = function (param) {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].delLabDataDIYURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            token: this.token,
+            id: param.labId
+        });
+    };
+    LabSDK.prototype.saveData = function (config) {
+        var _this = this;
+        if (this._saveData_resolve) {
+            return Promise.resolve({
+                success: false,
+                msg: '已有实验正在保存'
+            });
+        }
+        return new Promise(function (resolve) {
+            _this._saveData_resolve = resolve;
+            var data = { type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].SAVE_DATA };
+            if (config && config.title) {
+                data.title = config.title;
+            }
+            config.iframeWindow.postMessage(data, '*');
+        });
+    };
+    LabSDK.prototype.getSaveContent = function (config) {
+        var _this = this;
+        if (this._getSaveContent_resolve) {
+            return Promise.resolve({
+                success: false,
+                msg: '获取实验内容接口正在执行'
+            });
+        }
+        return new Promise(function (resolve) {
+            _this._getSaveContent_resolve = resolve;
+            var data = { type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].DATA_REQUEST };
+            config.iframeWindow.postMessage(data, '*');
+        });
+    };
+    LabSDK.prototype.renameData = function (param) {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].renameDIYURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            token: this.token,
+            id: param.labId,
+            title: param.newTitle
+        });
+    };
+    LabSDK.prototype.getChapter = function () {
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getChapterURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
+            token: this.token
+        });
+    };
+    LabSDK.prototype.clearRedis = function () {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].clearRedisURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            token: this.token
+        });
+    };
+    LabSDK.prototype.migration = function (param) {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].migrationURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            token: this.token,
+            toUniqueId: param.toUniqueId
+        });
+    };
+    LabSDK.prototype.getClassificationsList = function () {
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].classificationsURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
+            token: this.token
+        });
+    };
+    LabSDK.prototype.getResourcesByCategory = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getResourcesByCategoryURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
+            categoryId: param.categoryId
+        }).then(function (obj) {
+            if (_this.isBiological()) {
+                var dataObj = obj.data;
+                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
+                    dataObj.data.forEach(function (item) {
+                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
+                    });
+                }
+            }
+            return obj;
+        });
+    };
+    LabSDK.prototype.searchDIY = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].searchDIYURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            keyword: param.keyword
+        }).then(function (obj) {
+            if (_this.isBiological()) {
+                var dataObj = obj.data;
+                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
+                    dataObj.data.forEach(function (item) {
+                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
+                    });
+                }
+            }
+            return obj;
+        });
+    };
+    LabSDK.prototype.searchResources = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].searchResourcesURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
+            keyword: param.keyword
+        }).then(function (obj) {
+            if (_this.isBiological()) {
+                var dataObj = obj.data;
+                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
+                    dataObj.data.forEach(function (item) {
+                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
+                    });
+                }
+            }
+            return obj;
+        });
+    };
+    LabSDK.prototype.getResourcesByChapter = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getResourcesByChapterURL, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["merge"])({
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source
+        }, param)).then(function (obj) {
+            if (_this.isBiological()) {
+                var dataObj = obj.data;
+                if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'data.length')) {
+                    dataObj.data.forEach(function (item) {
+                        item.id = __WEBPACK_IMPORTED_MODULE_3_js_base64__["Base64"].encode(item.url);
+                    });
+                }
+            }
+            return obj;
+        });
+    };
+    LabSDK.prototype.getDIYLabList = function (param) {
+        if (!this._canDIY) {
+            return Promise.reject({
+                success: false,
+                msg: '只有可DIY学科才有我的实验目录'
+            });
+        }
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getListDIYURL, {
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            token: this.token,
+            page: param.page,
+            perPage: param.perPage
+        });
+    };
+    LabSDK.prototype.getInfoResources = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getInfoResourcesURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].source,
+            id: param.labId
+        }).then(function (obj) {
+            var dataObj = obj.data;
+            if (!dataObj.hasOwnProperty('containsVipequ') && _this.isPhysical()) {
+                dataObj.containsVipequ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'content.phyData.properties.data.containsVipequ', false);
+            }
+            dataObj.iconfull = _this.getOfficiaIconURL(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'properties.icon.url'));
+            return obj;
+        });
+    };
+    LabSDK.prototype.getInfoDIY = function (param) {
+        var _this = this;
+        return this.$get(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].getInfoDIYURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            id: param.labId
+        }).then(function (obj) {
+            var dataObj = obj.data;
+            if (!dataObj.hasOwnProperty('containsVipequ') && _this.isPhysical()) {
+                dataObj.containsVipequ = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'content.phyData.properties.data.containsVipequ', false);
+            }
+            dataObj.iconfull = _this.getOfficiaIconURL(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(dataObj, 'properties.icon.url'));
+            return obj;
+        });
+    };
+    LabSDK.prototype.shareDIY = function (param) {
+        return this.$post(__WEBPACK_IMPORTED_MODULE_2__lab_config__["a" /* docURL */].shareDIYURL, {
+            token: this.token,
+            pid: __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][this.pidType].lab,
+            uniqueId: param.uniqueId,
+            id: param.labId
+        });
+    };
+    LabSDK.prototype.freshEditerScreen = function (config) {
+        config.iframeWindow.postMessage({ type: __WEBPACK_IMPORTED_MODULE_1__config__["d" /* MESSAGE_TYPE */].PHYSICS_SDK_INTERFACE_FRESH_DATA }, '*');
+    };
+    LabSDK.prototype.getEditerURL = function (config) {
+        var labId = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(config, 'labId', '');
+        var editURL = this.editHost + "/#/" + this.editEndName + "?token=" + this.token + "&uid=" + this.uid + "&labid=" + labId;
+        if (this.editerDoc) {
+            editURL += '&EDITER_DEBUG=1';
+        }
+        if (config && config.hasOwnProperty('fromOfficia')) {
+            editURL += '&sourcefrom=1';
+        }
+        editURL += '&grade=' + this.grade;
+        editURL += '&sdkv1=1';
+        editURL += '&pidtype=' + this.pidType;
+        return editURL;
+    };
+    LabSDK.prototype.getPlayerURL = function (config) {
+        if (this.isBiological()) {
+            return __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].PLAYER_HOST + "?sourceid=" + config.labId + "&token=" + this.token + "&type=" + this.from;
+        }
+        var playerURL = this.playerHost + "?type=" + this.from + "&sourceid=" + config.labId;
+        return playerURL;
+    };
+    LabSDK.prototype.getOfficiaIconURL = function (icon) {
+        if (/^http/ig.test(icon)) {
+            return icon;
+        }
+        if (this.isBiological()) {
+            return __WEBPACK_IMPORTED_MODULE_2__lab_config__["b" /* host */][this.pidType].ICON_HOST + "/" + icon;
+        }
+        return "" + this.iconHost + icon;
+    };
+    LabSDK.prototype.getDIYIconURL = function (iconURL) {
+        if (/^http/ig.test(iconURL)) {
+            return iconURL;
+        }
+        return "" + this.iconHost + iconURL;
+    };
+    LabSDK.prototype.getAllLabPidScope = function () {
+        var list = [];
+        [__WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL1, __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL2, __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL1, __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL2, __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL1, __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL2].forEach(function (item) {
+            list.push(__WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][item].lab, __WEBPACK_IMPORTED_MODULE_1__config__["e" /* PID_VALUE */][item].source);
+        });
+        return list.join(',');
+    };
+    Object.defineProperty(LabSDK.prototype, "canDIY", {
+        get: function () {
+            return this._canDIY;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LabSDK.prototype.isPhysical = function () {
+        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].PHYSICAL2;
+    };
+    LabSDK.prototype.isChemical = function () {
+        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].CHEMICAL2;
+    };
+    LabSDK.prototype.isBiological = function () {
+        return this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL1 || this.pidType === __WEBPACK_IMPORTED_MODULE_1__config__["c" /* PID_TYPE */].BIOLOGICAL2;
+    };
+    Object.defineProperty(LabSDK.prototype, "grade", {
+        get: function () {
+            return __WEBPACK_IMPORTED_MODULE_1__config__["f" /* LAB_TYPE_GRADE */][this.pidType];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LabSDK.prototype, "debugEditerHost", {
+        get: function () {
+            return "" + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'EDITER', '');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LabSDK.prototype, "debugPlayerHost", {
+        get: function () {
+            return "" + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'PLAYER', '');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LabSDK.prototype, "editerDoc", {
+        get: function () {
+            if (!this.debugEditerHost.length) {
+                return false;
+            }
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["get"])(this.debugSettings[this.isPhysical() ? 'physics' : 'chemical'], 'EDITER_DOC', true);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return LabSDK;
+}(__WEBPACK_IMPORTED_MODULE_4__base__["a" /* SDKBase */]);
+
+
+/***/ }),
 /* 11 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20007,7 +20061,7 @@ if (true) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -20247,35 +20301,7 @@ if (true) {
     return {Base64: global.Base64}
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 14 */

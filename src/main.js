@@ -40,9 +40,6 @@ class main {
         this.uniqueId = 'nobooktest3'; // 用户账户,必填
         this.nickname = '橘子'; // 用户昵称,可选
         this.labId = ''; // 实验id,列表接口获取,在预览与编辑时需传入
-        // 初中物理 PID_TYPE.PHYSICAL1
-        // 初中化学 PID_TYPE.CHEMISTRY1
-        // 高中生物 PID_TYPE.BIOLOGICAL2
         this.pidType = PID_TYPE.PHYSICAL1; // 产品标识,nobook提供
         /** ************************************************************
          *                              第一步: 页面加载完成初始化
@@ -51,12 +48,26 @@ class main {
             // 先添加设置
             this.labSDK.setConfig({
                 // 登录部分(所有操作必须登陆后执行)
-                // EDIT_HOST_DEBUG: 'http://localhost:3033/',
-                // PLAYER_DEBUG: true,
-                // PLAYER_HOST_DEBUG: 'http://localhost:4800/',
                 pidType: this.pidType,
                 appKey: SECRET_DATA.appKey, // nobook 提供
-                from: 'chuangerxin'
+                from: 'zuoyebang',
+                // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
+                debugSettings: {
+                    DOC_DEBUG: true,
+                    physics: {
+                        EDITER_DOC: true,
+                        // EDITER: 'https://wuli-cdn.nobook.com',
+                        // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.3]-F-[develop]-C-[]',
+                        EDITER: 'http://192.168.1.22:3033',
+                        // PLAYER: 'http://localhost:4800'
+                    },
+                    chemical: {
+                        EDITER_DOC: false,
+                        EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.3]-F-[develop-v2]-C-[develop-v2]'
+                    },
+                    biological: {
+                    }
+                }
             });
             // ------------nobook内部测试用,对接的小伙伴可忽略此判断------------//
             if (this.labSDK.DEBUG) {
@@ -122,6 +133,25 @@ class main {
     freshBtnHandles() {
         // 登录
         $('.use-cla').val(this.uniqueId);
+        // 用户迁移按钮
+        $('.migration-btn').off('click');
+        $('.migration-btn').click(evt => {
+            let toUniqueId = $('.migration-cla').val();
+            toUniqueId = toUniqueId.trim();
+            if (toUniqueId.length > 0) {
+                console.log('****用户数据迁移, 目标用户:', toUniqueId);
+                this.migration(toUniqueId).then(data => {
+                    if (data.success) {
+                        layer.msg('转移成功');
+                    } else {
+                        layer.msg('转移失败');
+                    }
+                    this.freshRightList(-1);
+                });
+            } else {
+                layer.alert('目标用户不能为空')
+            }
+        });
         // 登录按钮
         $('.login-btn').off('click');
         $('.login-btn').click(evt => {
@@ -181,6 +211,13 @@ class main {
         $('.player-insert-cla').off('click');
         $('.player-insert-cla').click(() => {
             console.log('~播放器插入实验:', this.labId);
+        });
+        // 播放器生物跳转第二页
+        $('.jump-cla').off('click');
+        $('.jump-cla').click(() => {
+            console.log('~跳转第二页:', this.labId);
+            window.frames.document.getElementById('test-btn-id').click();
+            // $('#viewIframeId')[0].contentWindow.getElementById('test-btn-id').click();
         });
         $('.save-cla').off('click');
         $('.save-cla').click(() => {
@@ -595,9 +632,13 @@ class main {
                 break;
             case 2:
                 $('#playBoxId').show();
+                if (this.pidType === PID_TYPE.BIOLOGICAL1 || this.pidType === PID_TYPE.BIOLOGICAL2) {
+                    $('.jump-cla').show();
+                } else {
+                    $('.jump-cla').hide();
+                }
                 if (labId) {
                     // 打开实验
-                    console.log('*****************labId:', labId);
                     const url = this.labSDK.getPlayerURL({labId});
                     console.log('预览:', url);
                     $('#viewIframeId').attr('src', url);
@@ -770,6 +811,13 @@ class main {
         return this.labSDK.shareDIY({
             uniqueId: otherUniqueId,
             labId: labId
+        });
+    }
+
+    // 用户数据迁移
+    migration(toUniqueId) {
+        return this.labSDK.migration({
+            toUniqueId: toUniqueId
         });
     }
 
