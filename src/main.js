@@ -53,19 +53,19 @@ class main {
                 from: 'zuoyebang',
                 // 此属性为nobook内部调试使用,对接放将debugSettings属性去掉即可
                 debugSettings: {
-                    DOC_DEBUG: true,
-                    physics: {
-                        EDITER_DOC: true,
+                    DOC_DEBUG: false,
+                    PHYSICAL: {
+                        EDITER_DOC: false,
                         // EDITER: 'https://wuli-cdn.nobook.com',
                         // EDITER: 'http://192.168.1.111:3880/debug_version/PHYSICS/PHYSICS_P-[v5.0.3]-F-[develop]-C-[]',
                         EDITER: 'http://192.168.1.22:3033',
                         // PLAYER: 'http://localhost:4800'
                     },
-                    chemical: {
+                    CHEMICAL: {
                         EDITER_DOC: false,
                         EDITER: 'http://192.168.1.111:3030/debug_version/CHEMICAL/CHEMICAL_P-[v5.0.3]-F-[develop-v2]-C-[develop-v2]'
                     },
-                    biological: {
+                    BIOLOGICAL: {
                     }
                 }
             });
